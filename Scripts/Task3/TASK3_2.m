@@ -60,7 +60,8 @@ turbine_struct.Rated_TipSpeedRatio = lambda;
 
 % Temporary anonymous function required to pass the turbine structure to
 % the optimizer
-temp_function = @(x) compute_CP(x, turbine_struct, CHORD_LIMITS, TWIST_LIMITS);
+temp_function = @(x) compute_CP(x, turbine_struct, CHORD_LIMITS, ...
+    TWIST_LIMITS);
 
 % Options for the optimizer
 options = optimoptions('fmincon', 'TolFun', 1e-3, 'Display','iter');
@@ -69,7 +70,9 @@ options = optimoptions('fmincon', 'TolFun', 1e-3, 'Display','iter');
 fprintf('Starting optimizer...\n');
 fprintf('At every iteration CP is equal to -f(x).\n');
 fprintf('Iteration 0 is used to numerically approximate the Jacobian.\n');
-optimized_values = fmincon(temp_function, 0.5 * ones(1, N_PARAMS * 2 + 1), [], [], [], [], zeros(1, 2 * N_PARAMS + 1), ones(1, N_PARAMS * 2 + 1) , [], options);
+optimized_values = fmincon(temp_function, 0.5 * ...
+    ones(1, N_PARAMS * 2 + 1), [], [], [], [], ...
+    zeros(1, 2 * N_PARAMS + 1), ones(1, N_PARAMS * 2 + 1) , [], options);
 
 % Optimized Pitch Offset
 Blade_PitchOffset = optimized_values(1);
@@ -81,8 +84,12 @@ optimized_values = optimized_values(2:end);
 temp_r = linspace(0, Blade_Radius(end), length(optimized_values) / 2);
 r = linspace(0, R, length(Blade_Twist) );
 
-new_twist = Blade_Twist .* (1 + (interp1(temp_r, optimized_values(1: end / 2)', Blade_Radius, 'pchip') - 0.5) * TWIST_LIMITS);
-new_chord = Blade_Chord .* (1 + (interp1(temp_r, optimized_values(end / 2 + 1: end)', Blade_Radius, 'pchip') - 0.5) * CHORD_LIMITS);
+new_twist = Blade_Twist .* (1 + (interp1(temp_r, ...
+    optimized_values(1: end / 2)', Blade_Radius, 'pchip') - 0.5) ...
+    * TWIST_LIMITS);
+new_chord = Blade_Chord .* (1 + (interp1(temp_r, ...
+    optimized_values(end / 2 + 1: end)', Blade_Radius, 'pchip') - 0.5) ...
+    * CHORD_LIMITS);
 
 % Plot the new twist distribution
 subplot(2, 1, 1)
@@ -90,7 +97,8 @@ plot(r, Blade_Twist, r, smooth(new_twist), 'LineWidth', 2);
 hold on
 plot(r, new_twist, 'g--');
 grid on
-legend('Original twist', 'Optimized and smoothed twist', 'Raw optimized twist');
+legend('Original twist', 'Optimized and smoothed twist', ...
+    'Raw optimized twist');
 xlabel('Radius [m]');
 ylabel('Twist [°]');
 
@@ -99,7 +107,8 @@ subplot(2, 1, 2)
 plot(r, Blade_Chord, r, smooth(new_chord), 'LineWidth', 2);
 hold 
 plot(r, new_chord, 'g--');
-legend('Original chord', 'Optimized and smoothed chord', 'Raw optimized chord');
+legend('Original chord', 'Optimized and smoothed chord',...
+    'Raw optimized chord');
 axis equal
 grid on
 xlabel('Radius [m]');
@@ -115,7 +124,8 @@ Blade_Twist = smooth(new_twist);
 save([turbine_file '_OPTIMIZED.mat']);
 
 test_turbine = load([turbine_file '_OPTIMIZED.mat']);
-[new_CP, a] = compute_CP_raw(Blade_PitchOffset, Blade_Chord, Blade_Twist, test_turbine);
+[new_CP, a] = compute_CP_raw(Blade_PitchOffset, Blade_Chord, ...
+    Blade_Twist, test_turbine);
 
 save([turbine_file '_OPTIMIZED.mat']);
 
@@ -123,7 +133,8 @@ save([turbine_file '_OPTIMIZED.mat']);
 fprintf('Final optimized CP = %f \n', new_CP);
 
 test_turbine = load('../Common/NREL5MW.mat');
-[asd, test_turbine.a] = compute_CP_raw(test_turbine.Blade_PitchOffset, test_turbine.Blade_Chord, test_turbine.Blade_Twist, test_turbine);
+[asd, test_turbine.a] = compute_CP_raw(test_turbine.Blade_PitchOffset, ...
+    test_turbine.Blade_Chord, test_turbine.Blade_Twist, test_turbine);
 test_turbine.omega = 80 / test_turbine.Blade_Radius(end);
 save('../Common/NREL5MW.mat', '-struct', 'test_turbine');
 

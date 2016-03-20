@@ -36,4 +36,5 @@ Hub_Overhang = Hub_Overhang * lr;
 Nacelle_Diameter = Nacelle_Diameter * lr;
 
 % Save the newely obtained data to file
-save(['../Common/SCALED_' num2str(R) 'm_' num2str(Rated_Power * 1e-6) 'MW.mat']);
+save(['../Common/SCALED_' num2str(R) 'm_' num2str(Rated_Power * 1e-6) ...
+    'MW.mat']);
