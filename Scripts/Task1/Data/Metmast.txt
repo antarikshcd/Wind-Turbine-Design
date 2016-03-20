@@ -1,0 +1,8 @@
+229474
+-3637955,2
+
+32.84611S
+18.10958E
+
+http://www.wasa.csir.co.za/ProjectOverview.aspx?Project=4
+http://www.synnatschke.de/geo-tools/coordinate-converter.php
