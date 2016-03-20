@@ -38,7 +38,8 @@ A = pi * R .^ 2;    %m^2
 v = linspace(0, 25);
 
 % Weibull distribution for working hours
-h = 365 * 24 * wblpdf(v, weibull_fit_wind_speed(1),weibull_fit_wind_speed(2));
+h = 365 * 24 * wblpdf(v, weibull_fit_wind_speed(1), ...
+    weibull_fit_wind_speed(2));
 
 
 % Cycle through 
@@ -64,14 +65,18 @@ end
 [Perf_min, ind] = min(Perf);
 
 subplot(1, 2, 1)
-plot(R, Perf / max(Perf), 'b', R, E_y / max(E_y), 'g', R, C_norm / max(C_norm), 'r', [R(ind) R(ind)], [0 Perf_min / max(Perf)], 'k--', [R(ind)], [Perf_min / max(Perf)], 'gs')
-legend('Normalized energy cost', 'Normalized energy yield', 'Normalized cost');
+plot(R, Perf / max(Perf), 'b', R, E_y / max(E_y), 'g', R, ...
+    C_norm / max(C_norm), 'r', [R(ind) R(ind)], [0 Perf_min / max(Perf)], ...
+    'k--', [R(ind)], [Perf_min / max(Perf)], 'gs')
+legend('Normalized energy cost', 'Normalized energy yield',...
+    'Normalized cost');
 xlabel('Radius [m]');
 grid on
 ylim([0, 1.25]);
 
 txt = ['R(min cost) = ' num2str(R(ind)) 'm'];
-text(R(ind), Perf_min / max(Perf) - 0.02, txt, 'HorizontalAlignment', 'center')
+text(R(ind), Perf_min / max(Perf) - 0.02, txt, 'HorizontalAlignment', ...
+    'center')
 
 % Theoretical power curve
 P = (Cp .* 0.5 .* rho .* A(ind)) .* v .^ 3;
@@ -81,7 +86,8 @@ P(P >= Prated) = Prated;
 ind_rated = find(P == Prated);
 
 subplot(1, 2, 2)
-plot(v, P / Prated, 'g', v, h / max(h), 'b', [v(ind_rated(1)) v(ind_rated(1))], [0 1], 'k--', [6.7044 6.7044], [0 1], 'k--')
+plot(v, P / Prated, 'g', v, h / max(h), 'b', [v(ind_rated(1)) ...
+    v(ind_rated(1))], [0 1], 'k--', [6.7044 6.7044], [0 1], 'k--')
 grid on
 ylim([0, 1.25]);
 
