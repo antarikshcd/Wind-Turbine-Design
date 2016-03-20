@@ -80,7 +80,6 @@ xlabel('Normalized radius [-]');
 ylabel('Stress ratio [-]');
 legend('Sigma ratio flap direction', 'Sigma ratio edge direction');
 title('Stress ratio AFTER the correction');
-ylimits([0 2]);
 
 % Final blade mass value
 Final_Blade_Total_Mass = trapz(optimized_turbine.Blade_Mass) * (optimized_turbine.Blade_Radius(2) - optimized_turbine.Blade_Radius(1)); 
