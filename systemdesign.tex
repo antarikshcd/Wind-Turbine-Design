@@ -1,11 +1,13 @@
 \section{System design}
-This section of the report deals with the design of the main parameters of the wind turbine shown in tables \ref{tab:systdesign1} and \ref{tab:systdesign2}
+This section of the report deals with the design of the main parameters of the wind turbine shown in table \ref{tab:systdesign1} and \ref{tab:systdesign2}. 
+
+
 \subsection{Summary of the design}
 
-
+\begin{table}[h!]
 \begin{center} 
-Table 2.1. Objectives and boundary conditions\\
-\begin{tabular}{ |l|c| } \label{tab:systdesign1}
+\caption{Objectives and boundary conditions}\label{tab:systdesign1}
+\begin{tabular}{ |l|c| } 
 \hline
 \textbf{Parameter} & \textbf{Value/Description}  \\ 
 \hline
@@ -23,10 +25,12 @@ Visual constraint & - \\
 \hline
 \end{tabular} \\
 \end{center}
+\end{table}
 
+\begin{table}[h!]
 \begin{center} 
-Table 2.2. Design variables/choices\\
-\begin{tabular}{ |l|c| } \label{tab:systdesign2}
+\caption{Design variables/choices}\label{tab:systdesign2}
+\begin{tabular}{ |l|c| } 
 \hline
 \textbf{Parameter} & \textbf{Value/Description}  \\ 
 \hline
@@ -50,6 +54,7 @@ Hub height & 70.36 \\
 \hline
 \end{tabular}
 \end{center}
+\end{table}
 
 \subsection{Supporting material, analyses and rationale}
 
@@ -69,12 +74,13 @@ E_{y}\ = \sum_{i} P_{i}\, h_{i}\, \Delta \, v
 P = \frac{\pi\, \mathrm{Cp}\, R^2\, \rho\, v^3}{2}
 \label{eq:P}
 \end{equation}
-\\
-The results of the optimisation is shown in Figure \ref{fig:opradius}.
 
 \begin{equation}
 C_{norm}\ = 0.7 + 0.3 {\left(\frac{D}{D_{ref}}\right)}^{2.6}
 \label{eq:C}
 \end{equation}
 
-\includegraphics[width=15cm]{Images/op_radius.png} \label{fig:opradius}\\
+\v
+The result of the optimisation is shown in Figure \ref{fig:opradius}.
+
+\includegraphics[width=16cm]{Images/op_radius.png} \label{fig:opradius}\\
