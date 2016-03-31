@@ -12,7 +12,7 @@ load('../Common/Weibull_Data.mat');
 % DESIGN VARIABLE
 
 % Rated power, W
-Prated = 2.0 * 1e6; 
+Prated = 2.122 * 1e6; 
 % Efficiency
 Cp = 0.5; 
 
@@ -29,7 +29,7 @@ R_final = 120;      %m      Final radius
 Rref = 63 * sqrt(Prated / 5e6);   
 
 % Radius vector
-R = linspace(R_init, R_final);
+R = linspace(R_init, R_final, 1000);
 
 % Rotor area
 A = pi * R .^ 2;    %m^2
@@ -64,6 +64,7 @@ end
 
 [Perf_min, ind] = min(Perf);
 
+figure('units','centimeters','position',[.1 .1 28 14])
 subplot(1, 2, 1)
 plot(R, Perf / max(Perf), 'b', R, E_y / max(E_y), 'g', R, ...
     C_norm / max(C_norm), 'r', [R(ind) R(ind)], [0 Perf_min / max(Perf)], ...
@@ -84,7 +85,6 @@ P = (Cp .* 0.5 .* rho .* A(ind)) .* v .^ 3;
 P(P >= Prated) = Prated;
 
 ind_rated = find(P == Prated);
-
 subplot(1, 2, 2)
 plot(v, P / Prated, 'g', v, h / max(h), 'b', [v(ind_rated(1)) ...
     v(ind_rated(1))], [0 1], 'k--', [6.7044 6.7044], [0 1], 'k--')
@@ -99,6 +99,8 @@ text(v(ind_rated(1)), 1.02, txt, 'HorizontalAlignment', 'center')
 txt = ['v mean = ' num2str(6.7044) ' m/s'];
 text(mean_wind_speed, 1.05, txt, 'HorizontalAlignment', 'center')
 xlabel('Wind speed [m/s]');
+
+print('../../Images/optimal_cost','-depsc')
 
 R_optimal = R(ind);
 V_rated = v(ind_rated(1));

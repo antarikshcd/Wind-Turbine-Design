@@ -92,6 +92,7 @@ new_chord = Blade_Chord .* (1 + (interp1(temp_r, ...
     * CHORD_LIMITS);
 
 % Plot the new twist distribution
+figure('units','centimeters','position',[.1 .1 14 14])
 subplot(2, 1, 1)
 plot(r, Blade_Twist, r, smooth(new_twist), 'LineWidth', 2);
 hold on
@@ -113,6 +114,9 @@ axis equal
 grid on
 xlabel('Radius [m]');
 ylabel('Chord [m]');
+print('../../Images/twist_and_cord','-depsc')
+
+
 
 % Save the optimized values in a new mat file
 Rated_TipSpeedRatio = lambda;
