@@ -64,8 +64,7 @@ end
 
 [Perf_min, ind] = min(Perf);
 
-figure('units','centimeters','position',[.1 .1 28 14])
-subplot(1, 2, 1)
+figure('units','centimeters','position',[.1 .1 14 14])
 plot(R, Perf / max(Perf), 'b', R, E_y / max(E_y), 'g', R, ...
     C_norm / max(C_norm), 'r', [R(ind) R(ind)], [0 Perf_min / max(Perf)], ...
     'k--', [R(ind)], [Perf_min / max(Perf)], 'gs')
@@ -78,14 +77,16 @@ ylim([0, 1.25]);
 txt = ['R(min cost) = ' num2str(R(ind)) 'm'];
 text(R(ind), Perf_min / max(Perf) - 0.02, txt, 'HorizontalAlignment', ...
     'center')
+print('../../Images/optimal_cost','-depsc')
 
+figure('units','centimeters','position',[.1 .1 14 14])
 % Theoretical power curve
 P = (Cp .* 0.5 .* rho .* A(ind)) .* v .^ 3;
 % Cutoff at rated power
 P(P >= Prated) = Prated;
 
 ind_rated = find(P == Prated);
-subplot(1, 2, 2)
+
 plot(v, P / Prated, 'g', v, h / max(h), 'b', [v(ind_rated(1)) ...
     v(ind_rated(1))], [0 1], 'k--', [6.7044 6.7044], [0 1], 'k--')
 grid on
@@ -100,7 +101,7 @@ txt = ['v mean = ' num2str(6.7044) ' m/s'];
 text(mean_wind_speed, 1.05, txt, 'HorizontalAlignment', 'center')
 xlabel('Wind speed [m/s]');
 
-print('../../Images/optimal_cost','-depsc')
+print('../../Images/power_curve','-depsc')
 
 R_optimal = R(ind);
 V_rated = v(ind_rated(1));
