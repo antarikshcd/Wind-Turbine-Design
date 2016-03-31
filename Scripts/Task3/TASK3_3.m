@@ -8,7 +8,7 @@ load('../Common/optimal_radius.mat');
 addpath('functions');
 
 % Linearly scaled turbine file name
-turbine_file = ['../Common/SCALED_' num2str(R_optimal) 'm_2MW.mat'];
+turbine_file = ['../Common/SCALED_' num2str(R_optimal) 'm_' num2str(Prated * 1e-6) 'MW.mat'];
 
 % Optimized turbine structure
 optimized_turbine = load([turbine_file '_OPTIMIZED.mat']);

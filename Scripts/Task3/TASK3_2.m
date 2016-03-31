@@ -30,7 +30,7 @@ load('../Common/NREL5MW.mat');
 % Load the data of the new turbine from preliminar design
 load('../Common/optimal_radius.mat');
 % Filename of the turbine to be optimized
-turbine_file = ['../Common/SCALED_' num2str(R_optimal) 'm_2MW.mat'];
+turbine_file = ['../Common/SCALED_' num2str(R_optimal) 'm_' num2str(Prated * 1e-6) 'MW.mat'];
 
 addpath('functions');
 
@@ -114,9 +114,22 @@ axis equal
 grid on
 xlabel('Radius [m]');
 ylabel('Chord [m]');
-print('../../Images/twist_and_cord','-depsc')
+print('../../Images/twist_and_cord','-dpng')
 
+figure('units','centimeters','position',[.1 .1 14 14])
+plot(r, smooth(new_twist), 'LineWidth', 2);
+grid on
+xlabel('Radius [m]');
+ylabel('Twist [°]');
+print('../../Images/twist','-dpng')
 
+figure('units','centimeters','position',[.1 .1 14 14])
+plot(r, smooth(new_chord), 'LineWidth', 2);
+axis equal
+grid on
+xlabel('Radius [m]');
+ylabel('Chord [m]');
+print('../../Images/chord','-dpng')
 
 % Save the optimized values in a new mat file
 Rated_TipSpeedRatio = lambda;
