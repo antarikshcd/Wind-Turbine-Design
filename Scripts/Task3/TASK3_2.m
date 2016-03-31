@@ -45,7 +45,7 @@ Max_tip_speed_ref = 80; % <------- MUST BE MANUALLY CHANGED IF REQUIRED!!!!
 % Generated sound pressure is a function of the 5-th power of the tip speed;
 % Sensed sound pressure is a function of the inverse of 2-nd power of the
 % radius.
-max_tip_speed = ((R / R_ref) ^ 2) ^ (1 / 5) * Max_tip_speed_ref;
+max_tip_speed = ((R / R_ref) ^ 2) ^ (1 / 5) * Max_tip_speed_ref
 
 
 % New tip speed ratio
@@ -114,7 +114,7 @@ axis equal
 grid on
 xlabel('Radius [m]');
 ylabel('Chord [m]');
-print('../../Images/twist_and_cord','-dpng')
+print('../../Images/twist_and_chord','-dpng')
 
 figure('units','centimeters','position',[.1 .1 14 14])
 plot(r, smooth(new_twist), 'LineWidth', 2);

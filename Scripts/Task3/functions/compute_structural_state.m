@@ -34,7 +34,7 @@ x = turbine_struct.Blade_Radius - turbine_struct.Blade_Radius(1);
 
 
 %% plots
-figure
+figure('units','centimeters','position',[.1 .1 14 14])
 plot(x, u_y, 'bo-');
 hold on;
 grid on;
