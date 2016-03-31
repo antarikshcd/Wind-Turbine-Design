@@ -15,16 +15,7 @@ Special considerations for the chosen system design & XX  \\
 \end{tabular} \\
 \end{center}
 
-\begin{center}
-Table 42. Design variables/choices\\
-\begin{tabular}{ |l|c| } 
-\hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
-\hline
-Drive train configuration & XX  \\ 
-\hline
-\end{tabular} \\
-\end{center}
+
 
 Figure 41. Overview of nacelle
 
@@ -48,6 +39,7 @@ Starting from the rated rotational speed of the low speed shaft, the torque on t
 \end{equation}
 
 
+\newpage
 
 \subsection{Gearbox}
 
@@ -66,32 +58,81 @@ Torque (LSS / HSS) & XX \\
 \end{tabular} \\
 \end{center}
 
-\begin{center}
-Table 44. Design variables/choices\\
-\begin{tabular}{ |l|c| } 
+\begin{table}[h]
+\centering
+\caption{Gearbox configuration}
+\label{tab:gearbox_config}
+\begin{tabular}{ |l|c|c| } 
 \hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value/Description}\\ 
 \hline
-Number of stages & XX  \\ 
-\hline
-Type of stage 1 (e.g. planetary) & XX \\
-\hline
-Transmission ratio stage 1 (LSS) & XX \\
-\hline
-Type of stage 1 (when applicable) & XX \\
-\hline
-Transmission ratio stage 2 (when applicable) & XX \\
+Gearbox type & & 3 stage multistage gearbox\\
+Gearbox stage 1 & & planetary\\
+Gearbox stage 2 & & parallel\\
+Gearbox stage 3 & & parallel\\
+Gearbox ratio & N & 75 \\
+Gear ratio stage 1 & $N_1$ & 5\\
+Gear ratio stage 2 & $N_2$ & 5\\
+Gear ratio stage 3 & $N_3$ & 3\\
+Number of teeth sun& $z_{sun1}$ & 20\\
+Number of teeth planet& $z_{planet3}$ & 30\\
+Number of teeth ring& $z_{ring3}$ & 80\\
+Number of teeth pinion& $z_{p2}$ & 20\\
+Number of teeth gear& $z_{g2}$ & 100\\
+Number of teeth pinion& $z_{p3}$ & 20\\
+Number of teeth gear& $z_{g3}$ & 60\\
 \hline
 \end{tabular} \\
-\end{center}
+\end{table}
 
 \subsubsection{Supporting material, analyses and rationale}
 
+The gearbox is designed as a three stages multistage gearbox with the first stage being planetary and the second and third stage being parallel stages. With this an overall gearbox ratio of 75 is achieved. 
+
+The weight of the gearbox is estimated using the following empirical formula
+
+\begin{equation}
+    m_{gearbox} = 70.94 \cdot Q_{ls}^{0.759}
+\end{equation}
+where $Q_{ls}$ is the rated low speed shaft torque in kNm \cite{Fingersh2006}.
 
 
+
+\newpage
 \subsection{Generator}
 
 \subsubsection{Summary of the design}
+
+\begin{table}[h]
+\centering
+\caption{Generator configuration}
+\label{tab:generator_config}
+\begin{tabular}{ |l|c|c|} 
+\hline
+\textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
+\hline
+Type of generator & & DFIG\\
+Power rating & & 
+Generator power factor & pf & 0.95\\
+Grid frequency & $f_{grid}$ & 50 Hz  \\
+Generator poles & $p$ & 6\\
+Minimum generator speed & $n_{min}$ & 567 rpm\\
+Synchronous speed & $n_s$ & 1000 rpm\\
+Generator rated speed & $n_{rated}$ & 1077 rpm\\
+Maximum generator speed & $n_{max}$ & 1250 rpm \\
+Force density & $F_d$ & 30000 $\frac{N}{m}$\\
+Generator volume & $V_{gen}$ & 0.31 $m^3$\\
+Generator length & $L_{gen}$ & 1 m\\
+Rotor radius & $R_{rot}$ & 0.31 m\\
+Rotor mass & $m_{rot}$ & 2457 kg \\
+Inertia generator rotor & $\Theta_{rot}$ & 122.5 $kg m^2$\\
+Generator inverter rating & $x$ & 0.25\\
+Savety margin against overshoot & & 16 \%\\
+\hline
+\end{tabular} \\
+\end{table}
+
+
 
 \begin{center}
 Table 45. Objectives and boundary conditions\\
@@ -123,10 +164,16 @@ Voltage level & XX \\
 \end{tabular} \\
 \end{center}
 
+
+
 \subsubsection{Supporting material, analyses and rationale}
 
+Generator rotor inertia
+$\Theta_{rot}= \dfrac{1}{2}m_{rot}R_{rot}^2$
 
+DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. The DFIG generator is operated in PV mode with a power factor specified at 0.9 leading and 0.85 lagging.
 
+\newpage
 \subsection{Inverter}
 
 \subsubsection{Summary of the design}

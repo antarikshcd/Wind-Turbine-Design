@@ -65,7 +65,7 @@
 
 \include{reflection}
 
-\include{appendix_a}
+
 
 \addcontentsline{toc}{section}{References}
 
@@ -73,8 +73,25 @@
 
 
 \bibliography{bibliography}
+% include in .bib file if needed
+%@MastersThesis{Label,
+% author               = {},
+% title                = {},
+% school           	  = {},
+% year                 = {},
+% month			      = {},
+% }
+
+%@InProceedings{Label,
+%  author 			  = {},
+%  title 			  = {},
+%  booktitle 		  = {},
+ % pages 			  = {},
+ % year 				  = {},
+%}
+\bibliographystyle{unsrt}
 \nocite{*}
 
-
+\include{appendix_a}
 
 \end{document}

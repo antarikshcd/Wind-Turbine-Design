@@ -1,24 +1,26 @@
-\section{Rotor aerodynamic and structural design}
-
+\section{Rotor aerodynamic and structural design} \label{rotor design}
+This section deals with the aerodynamic and the inner structural design of the blades for the on-shore wind turbine to be designed at the tip-speed ratio of $7.36$ and for a rotor diameter of $96.36\ m$, as decided in Section \ref{system design}. 
 \subsection{Summary of the design}
-\begin{center}
-Table 31. Objectives and boundary conditions\\
+\begin{table}[H]
+\begin{center} 
+\caption{Objectives and boundary conditions}\label{tab:rotordesign2}
 \begin{tabular}{ |l|c| } 
 \hline
 \textbf{Parameter} & \textbf{Value/Description}  \\ 
 \hline
-Number of blades & XX  \\ 
+Number of blades & 3  \\ 
 \hline
-Rotor diameter & XX \\ 
+Rotor diameter & 96.36 m \\ 
 \hline
-Design tip speed ratio & XX \\
+Design tip speed ratio & 7.36 \\
 \hline
 \end{tabular} \\
 \end{center}
+\end{table}
 
-
-\begin{center}
-Table 31. Objectives and boundary conditions\\
+\begin{table}[H]
+\begin{center} 
+\caption{Objectives and boundary conditions}\label{tab:rotordesign2}
 \begin{tabular}{ |l|c| } 
 \hline
 \textbf{Parameter} & \textbf{Value/Description}  \\ 
@@ -41,6 +43,7 @@ Twist offset at tip (= blade pitch angle for optimal operation) & XX \\
 \hline
 \end{tabular} \\
 \end{center}
+\end{table}
 
 
 Figure 31. Chord distribution\\
@@ -48,3 +51,12 @@ Figure 31. Chord distribution\\
 Figure 32. Twist distribution\\
 
 \subsection{Supporting material, analyses and rationale}
+The blade from the NREL $5\ MW$ reference turbine \textcolor{red}{(cite this)} is designed using an optimised chord and twist distribution based on its design parameters. The design is then compared with the original reference turbine.
+
+The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters have been shown in Table (\textcolor{red}{show table for scaling laws}). These scaling laws are obtained from the square-cube law which states that (\textcolor{red}{state the square-cube law}) and by referring to the scaling laws provided with the course material (\textcolor{red}{cite scaling laws}). The blade is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$.
+
+(\textcolor{red}{Describe the process of optimisation here!!})
+
+The outer geometry of a rotor blade is thus defined. In order to obtain the interior structure the mass and stiffness of the blades, which make up the structural properties, are scaled from the NREL $5\ MW$ reference turbine using the scaling laws shown in Table (\textcolor{red}{show table for scaling laws}). The scaled blade structural properties are utilised to calculate the tip deflection of the blade designed for the new $2 MW$ wind turbine. 
+
+The tip deflection is calculated using a simple finite element model. The model is based on the Bernoulli beam theory which is applied to the blade modelled as a cantilever beam. The blade discretized using the beam theory is shown in Figure (\textcolor{red}{show beam_theory discretized figure}).The equations for moment and deflection obtained from the Beam theory are applied for each section. Upon using the model the deflections in the flap-wise and the edgewise direction are shown in Figure (\textcolor{red}{show deflection plots}.It can be observed from the plots that, the deflections for the new blade is smaller than that for the refernce blade. Of particular interest however, is the tip deflection. The tip deflection will determine the average
