@@ -77,7 +77,7 @@ ylim([0, 1.25]);
 txt = ['R(min cost) = ' num2str(R(ind)) 'm'];
 text(R(ind), Perf_min / max(Perf) - 0.02, txt, 'HorizontalAlignment', ...
     'center')
-print('../../Images/optimal_cost','-depsc')
+print('../../Images/optimal_cost','-dpng')
 
 figure('units','centimeters','position',[.1 .1 14 14])
 % Theoretical power curve
@@ -101,7 +101,7 @@ txt = ['v mean = ' num2str(6.7044) ' m/s'];
 text(mean_wind_speed, 1.05, txt, 'HorizontalAlignment', 'center')
 xlabel('Wind speed [m/s]');
 
-print('../../Images/power_curve','-depsc')
+print('../../Images/power_curve','-dpng')
 
 R_optimal = R(ind);
 V_rated = v(ind_rated(1));
