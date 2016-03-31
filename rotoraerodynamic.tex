@@ -1,5 +1,5 @@
 \section{Rotor aerodynamic and structural design} \label{rotor design}
-This section deals with the aerodynamic and the inner structural design of the blades for the on-shore wind turbine to be designed at the tip-speed ratio of $7.36$ and for a rotor diameter of $96.36\ m$, as decided in Section \ref{system design}. 
+This section deals with the aerodynamic and the inner structural design of the blades for the on-shore wind turbine to be designed at the tip-speed ratio of $7.67$ and for a rotor diameter of $100.0 \m$, as decided in Section \ref{system design}. 
 \subsection{Summary of the design}
 \begin{table}[H]
 \begin{center} 
@@ -48,12 +48,15 @@ Twist offset at tip (= blade pitch angle for optimal operation) & XX \\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{Images/chord.png} 
-\caption{Normalised power curve and wind distribution}\label{fig:pcurve}
+\caption{Chord distribution}\label{fig:chord}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Images/twist.png} 
+\caption{Twist distribution}\label{fig:twist}
+\end{figure}
 
-
-Figure 32. Twist distribution\\
 
 \subsection{Supporting material, analyses and rationale}
 The blade from the NREL $5\ MW$ reference turbine \textcolor{red}{(cite this)} is designed using an optimised chord and twist distribution based on its design parameters. The design is then compared with the original reference turbine.
@@ -63,6 +66,15 @@ The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired 
 The optimisation's target is to obtain the twist and chord distribution functions that produce the highest $C_p$ under some constraints. Such functions are expressed by using a set of degrees of freedom, which represent the values of twist and chord at certain uniformly distributed radial locations. The values at all the other locations are obtained by means of cubic spline interpolation. The radial locations used to evaluate the value of $C_p$ are linearly scaled from the reference NREL $5\ MW$ turbine.
 
 The value of $C_p$ is computed by using the BEM code available in the FAST program. Such code has been extracted and isolated as a function that returns the value of $C_p$ given the properties of the wind turbine, as can be seen in listing \ref{lst:Cp}.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Images/twist_and_chord.png} 
+\caption{Twist distribution}\label{fig:twist_and_chord}
+\end{figure}
+
+\textcolor{red}{(TO BE COMPLETED)}
 
 
 The outer geometry of a rotor blade is thus defined. In order to obtain the interior structure the mass and stiffness of the blades, which make up the structural properties, are scaled from the NREL $5\ MW$ reference turbine using the scaling laws shown in Table (\textcolor{red}{show table for scaling laws}). The scaled blade structural properties are utilised to calculate the tip deflection of the blade designed for the new $2 MW$ wind turbine. In order to calculate the tip deflections both the reference blades and the optimised blades were loaded at a wind speed $v=9.84\ m/s$, which is the rated wind speed for the $2\ MW$ wind turbine.
