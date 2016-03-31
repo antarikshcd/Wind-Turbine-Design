@@ -1,8 +1,39 @@
 \section{Drive train design}
 
-\subsection{Main frame, drive train and electrical system configuration}
+\subsection{Drive train configurations}
+
+\begin{table}[h]
+\centering
+\caption{Comparison of drive train concepts}
+\label{tab:comp_drivetrain_concepts}
+\begin{tabular}{ |l|l|l|l| } 
+\hline
+\textbf{Drivetrain} & \textbf{Advantages} & \textbf{Disadvantages} & \textbf{Specifications}\\ 
+\hline
+Doubly Fed Induction (geared) & \begin{itemize} \item Suitable for 2 MW rated power \\ \item Variable speed generator \\
+\item Active- and reactive-power control \\
+\item Only about a third of the power flows though inverter → smaller inverter → lower inverter cost and losses \\
+\end{itemize}
+& \begin{itemize}
+\item Poor power quality \\
+\item Gear failures and maintenance costs \\
+\item Generator with brushes \\
+\end{itemize}
+& \begin{itemize}
+    \item Pitch control \\
+    \item For rated power between 1.5 – 3 MW\\
+\end{itemize}\\
+\hline
+\end{tabular} \\
+\end{table}
+
+\subsubsection{Choice of drive train}
+
+The choice drive train configuration for the wind turbine was made by weighing out advantages and disadvantages of various types of typical drive trains and relating them to the market location and conditions are being aimed for. 
+\subsection{Main frame and electrical system configuration}
 
 \subsubsection{Summary of the design}
+
 
 \begin{center}
 Table 41. Objectives and boundary conditions\\
@@ -21,23 +52,6 @@ Figure 41. Overview of nacelle
 
 \subsubsection{Supporting material, analyses and rationale}
 
-\textbf{Scaling down the NREL 5MW turbine drivetrain to the AlphaWind drivetrain}
-
-Mechanical power on the low speed shaft needed to drive the generator is augmented with the overall efficiency of the drivetrain 
-
-\begin{equation}
-    P_m = \dfrac{P}{\eta}
-    \label{eq:P_m}
-\end{equation}
-
-
-Starting from the rated rotational speed of the low speed shaft, the torque on the low speed shaft is determined as: 
-
-\begin{equation}
-    Q_{ls} = \dfrac{P_{m}}{\omega_r}
-    \label{eq:Q_ls}
-\end{equation}
-
 
 \newpage
 
@@ -45,18 +59,22 @@ Starting from the rated rotational speed of the low speed shaft, the torque on t
 
 \subsubsection{Summary of the design}
 
-\begin{center}
-Table 43. Objectives and boundary conditions\\
-\begin{tabular}{ |l|c| } 
+The summary of the gearbox design is given in Table \ref{tab:overview_drivetrain} and \ref{tab:gearbox_config}. 
+
+\begin{table}[h]
+\centering
+\caption{Overview of the drivetrain}
+\label{tab:overview_drivetrain}
+\begin{tabular}{ |l|c|c| } 
 \hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value/Description}\\ 
 \hline
-Speed range (LSS / HSS) & XX  \\ 
-\hline
-Torque (LSS / HSS) & XX \\
+Speed range at rated power (LSS / HSS) & $n_{LSS}$/$n_{HSS}$&  14.36 rpm / 1077 rpm \\ 
+Torque at rated power (LSS / HSS) & $Q_{LSS}$ / $Q_{HSS}$ & 1410696 Nm / 18253 Nm\\
+Mass of the gearbox & $m_{gearbox}$ & 17.4 t\\
 \hline
 \end{tabular} \\
-\end{center}
+\end{table}
 
 \begin{table}[h]
 \centering
@@ -66,7 +84,7 @@ Torque (LSS / HSS) & XX \\
 \hline
 \textbf{Parameter} & \textbf{Symbol} & \textbf{Value/Description}\\ 
 \hline
-Gearbox type & & 3 stage multistage gearbox\\
+Gearbox type & & 3 stage gearbox\\
 Gearbox stage 1 & & planetary\\
 Gearbox stage 2 & & parallel\\
 Gearbox stage 3 & & parallel\\
@@ -87,22 +105,31 @@ Number of teeth gear& $z_{g3}$ & 60\\
 
 \subsubsection{Supporting material, analyses and rationale}
 
-The gearbox is designed as a three stages multistage gearbox with the first stage being planetary and the second and third stage being parallel stages. With this an overall gearbox ratio of 75 is achieved. 
+The torque on the low speed shaft (LSS) needed to generate 2 MW of rated power can be found using the mechanical power on the LSS and the rated angular frequency as
+\begin{equation}
+    Q_{LSS} = \dfrac{P_{LSS\, rated}}{\omega_{rated}}
+    \label{eq:Q_LSS}
+\end{equation}
+where $P_{LSS}$ is the rated power augmented by the overall drivetrain efficiency. 
 
+The gearbox is designed as a three stages multistage gearbox with the first stage being planetary and the second and third stage being parallel stages. With this an overall gearbox ratio of 75 is achieved. 
 The weight of the gearbox is estimated using the following empirical formula
 
 \begin{equation}
-    m_{gearbox} = 70.94 \cdot Q_{ls}^{0.759}
+    m_{gearbox} = 70.94 \cdot Q_{LSS}^{0.759}
 \end{equation}
-where $Q_{ls}$ is the rated low speed shaft torque in kNm \cite{Fingersh2006}.
+where $Q_{LSS}$ is the rated LSS torque given by Equation \ref{eq:Q_LSS} inserted in kNm \cite{Fingersh2006}. With this the mass of the gearbox was estimated as
+
+\begin{align}
+m_{gearbox} = 17.4 \, t
+\end{align}
 
 
-
-\newpage
 \subsection{Generator}
 
 \subsubsection{Summary of the design}
 
+The summary of the generator design is given in Table \ref{tab:generator_config}. 
 \begin{table}[h]
 \centering
 \caption{Generator configuration}
@@ -112,66 +139,88 @@ where $Q_{ls}$ is the rated low speed shaft torque in kNm \cite{Fingersh2006}.
 \textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
 \hline
 Type of generator & & DFIG\\
-Power rating & & 
+Power rating & & 2.105 MVAr\\
 Generator power factor & pf & 0.95\\
 Grid frequency & $f_{grid}$ & 50 Hz  \\
 Generator poles & $p$ & 6\\
+Generator voltage level & $U_{gen}$ & 1400 V\\
+Generator torque at rated speed & $Q_{HSS}$ & 18253 Nm \\
 Minimum generator speed & $n_{min}$ & 567 rpm\\
 Synchronous speed & $n_s$ & 1000 rpm\\
 Generator rated speed & $n_{rated}$ & 1077 rpm\\
 Maximum generator speed & $n_{max}$ & 1250 rpm \\
 Force density & $F_d$ & 30000 $\frac{N}{m}$\\
-Generator volume & $V_{gen}$ & 0.31 $m^3$\\
+Generator volume & $V_{gen}$ & 0.3042 $m^3$\\
 Generator length & $L_{gen}$ & 1 m\\
-Rotor radius & $R_{rot}$ & 0.31 m\\
-Rotor mass & $m_{rot}$ & 2457 kg \\
+Rotor radius & $R_{rot}$ & 0.3111 m\\
+Rotor mass & $m_{rot}$ & 2388 kg \\
 Inertia generator rotor & $\Theta_{rot}$ & 122.5 $kg m^2$\\
 Generator inverter rating & $x$ & 0.25\\
-Savety margin against overshoot & & 16 \%\\
+Safety margin against rotor overshoot & & 16 \%\\
 \hline
 \end{tabular} \\
 \end{table}
 
-
-
-\begin{center}
-Table 45. Objectives and boundary conditions\\
-\begin{tabular}{ |l|c| } 
-\hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
-\hline
-Power rating (think of power factor) & XX \\
-\hline
-Speed range (HSS) & XX \\
-\hline
-Torque (HSS) & XX \\
-\hline
-\end{tabular} \\
-\end{center}
-
-\begin{center}
-Table 46. Design variables/choices\\
-\begin{tabular}{ |l|c| } 
-\hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
-\hline
-Type of generator & XX  \\ 
-\hline
-Number of poles of the generator & XX \\
-\hline
-Voltage level & XX \\
-\hline
-\end{tabular} \\
-\end{center}
-
-
-
 \subsubsection{Supporting material, analyses and rationale}
 
-Generator rotor inertia
-$\Theta_{rot}= \dfrac{1}{2}m_{rot}R_{rot}^2$
+For the AlphaWind design we choose to use a DFIG. This offers the advantage to operate at a wide range of generator speeds with high efficiency.
 
-DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. The DFIG generator is operated in PV mode with a power factor specified at 0.9 leading and 0.85 lagging.
+DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. Since the turbine is variable speed and thus delivers dependent on the wind speed different amount of power to the grid, the DFIG generator is operated in PV mode with a power factor specified at 0.95.
+
+The mechanical power needed to get a desired amount of electrical power out of the turbine is calculated as
+
+\begin{equation}
+    P_{in} = \dfrac{P_{out}}{\eta_{el}\eta_{s1}\eta_{s2}\eta_{s3}} - P_{loss\,fix}
+    \label{eq:P_in}
+\end{equation}
+where $\eta_{el}$ is the efficiency of the generator and all the other components together (bearings), $\eta_{si}$ are the efficiencies of the gearbox stages (variable loss) and $P_{loss, \, fix}$ are the fixed losses in the gearbox stages independent of the transmitted power.
+
+
+The the efficiency of the generator together with the bearings is assumed to be constant
+\begin{align}
+    \eta_{el} = 0.9715
+\end{align}
+
+With this the input needed into the generator to produce 2 MW of rated power becomes
+
+\begin{align}
+    P_{in\,gen} = \dfrac{P_{rated}}{\eta_{el}} = \dfrac{2 MW}{0.9715} = 2.05 MW
+\end{align}
+
+At rated speed each gearbox stage is assumed to have 1\% loss of transmitted power. This means an efficiency of $\eta_{ri} = 0.9900$ at rated power for each stage, where half of it is assumed to be independent of the transmitted power and half of it is assumed to be a linear function of the transmitted power. With this the fixed loss of the gearbox is calculated at rated power as half of the sum of the losses in each stage: 
+
+\begin{align}
+    P_{loss\,fix} &= \dfrac{1}{2} \sum \limits_{s = 1}^{3} \left( P_{in} - P_{out}\right)_{s}\\
+    &= \dfrac{1}{2} \left( \left( \dfrac{P_{in\,gen}}{\eta_{r1}\eta_{s2} \eta_{r3}} - \dfrac{P_{in\,gen}}{\eta_{r2} \eta_{r3}} \right)_{1} + \left( \dfrac{P_{in\,gen}}{\eta_{r2} \eta_{r3}} - \dfrac{P_{in\,gen}}{\eta_{r3}}\right)_{2}+ \left( \dfrac{P_{in\,gen}}{\eta_{r3}} - P_{in\,gen} \right) \right)\\
+    &= \dfrac{1}{2} \left( \dfrac{2.05 MW}{0.99^3} - 2.05 MW \right) = 31.5 \,kW
+\end{align}
+
+For the losses that vary with the power in Equation \ref{eq:P_in} subsequently a gearbox efficiency of $\eta_{si} = 0.9950$ must be used (since the fixed 0.5 \% loss is accounted via $P_{loss \, fix}$).
+
+With this the overall efficiency of the drivetrain at rated power is
+
+\begin{align}
+\eta_{tot, rated} = 0.9430    
+\end{align}
+
+The dimensions of the generator rotor are calculated using the formulae given in the lecture. We assume the flux density of the stator windings to be $F_d = 30000 \frac{N}{m}$. With this volume of the rotor is calculated as
+
+\begin{equation}
+    V_{rot} = \dfrac{P_{in \, gen}}{2 \omega_{rated} F_d} = \dfrac{2.05 MW}{2 \cdot 112.78 \frac{rad}{s} \cdot 30000 \frac{N}{m}} = 0.3042 \,m^3
+\end{equation}
+
+The length of the generator rotor was assumed to be 1 m, with this the generator rotor radius $R_{rot}$ was calculated. Using these dimensions the generator rotor mass is estimated. The overall generator mass (rotor + stator + housing) is calculated using again the empirical formula given in Reference~\cite{Fingersh2006}
+
+\begin{equation}
+    m_{generator} = 6.47 P_{rated}^{0.9223}
+\end{equation}
+where $P_{rated}$ is the rated power of the turbine inserted in kW. 
+
+The generator rotor inertia is calculated using the standard formula for the inertia of a rotor: 
+
+\begin{equation}
+\Theta_{rot}= \dfrac{1}{2}m_{rot}R_{rot}^2
+\end{equation}
 
 \newpage
 \subsection{Inverter}
