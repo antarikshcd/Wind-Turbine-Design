@@ -5,7 +5,7 @@ This section deals with the aerodynamic and the inner structural design of the b
 
 \begin{table}[H]
 \begin{center} 
-\caption{Objectives and boundary conditions}\label{tab:rotordesign2}
+\caption{Objectives and boundary conditions}\label{tab:rotordesign1}
 \begin{tabular}{ |l|c| } 
 \hline
 \textbf{Parameter} & \textbf{Value/Description}  \\ 
@@ -80,10 +80,17 @@ Chord, $c$ & R & 0.794\\
 \subsection{Supporting material, analyses and rationale}
 The blade from the NREL $5\ MW$ reference turbine \cite{5MW} is designed using an optimised chord and twist distribution based on its design parameters. The design is then compared with the original reference turbine.
 
-The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters is shown in Table (\textcolor{red}{show table for scaling laws}). These scaling laws are obtained from the square-cube law which states that (\textcolor{red}{state the square-cube law}) and by referring to the scaling laws provided with the course material (\textcolor{red}{cite scaling laws}). The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in listing \ref{lst:task3_2} of Appendix A.
+The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters is shown in Table \ref{tab:aero_struct_scaling}. These scaling laws are obtained from the square-cube law which states that (\textcolor{red}{state the square-cube law}) and by referring to the scaling laws provided with the course material \cite{scaling_laws}. The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in listing \ref{lst:task3_2} of Appendix A.
 
-The optimisation's target is to obtain the twist and chord distribution functions that produce the highest $C_p$ under some constraints. Such functions are expressed by using a set of degrees of freedom, which represent the values of twist and chord at certain uniformly distributed radial locations. The values at all the other locations are obtained by means of cubic spline interpolation. The radial locations used to evaluate the value of $C_p$ are linearly scaled from the reference NREL $5\ MW$ turbine. The value of $C_p$ is computed by using the BEM code available in the FAST program. Such code has been extracted and isolated as a function that returns the value of $C_p$ given the properties of the wind turbine, as can be seen in listing \ref{lst:Cp}.
+The optimisation's target is to obtain the twist and chord distribution functions that produce the highest $C_p$ under some logical constraints, i.e. the fact that the chord can not assume negative values. Moreover, a set of technological constraints are added, such that the new values can't be larger than double the original value. 
 
+Such functions are expressed by using a set of degrees of freedom, which represent the values of twist and chord at certain uniformly distributed radial locations. The values at all the other locations are obtained by means of cubic spline interpolation. The radial locations used to evaluate the value of $C_p$ are linearly scaled from the reference NREL $5\ MW$ turbine. The value of $C_p$ is computed by using the BEM code available in the FAST program. Such code has been extracted and isolated as a function that returns the value of $C_p$ given the properties of the wind turbine, as can be seen in listing \ref{lst:Cp}.
+
+In order to simplify the analysis, it is decided not to change the airfoil distribution of the reference turbine. Albeit reductive, such choice has been taken to reduce the number of degrees of freedom of the problem, and because of the fact that such a discontinuous function would not be easily optimised by high performance algorithms, which usually require the computation of the Jacobian matrix of the cost function.
+
+After the initial setup of the problem, the new values of twist, chord and overall pitch of the blade are computed by an interior-point optimisation algorithm. The results of such optimisation are smoothed out to account for technological constraints. The final value of $C_p$ is equal to $0.5005$, against an initial value of $0.48$ for the reference turbine, leading to a $4\%$ increment.
+
+The scaled and optimised values of twist and chord are visible in figure \ref{fig:twist_and_chord}.
 
 \begin{figure}[H]
 \centering
@@ -91,15 +98,16 @@ The optimisation's target is to obtain the twist and chord distribution function
 \caption{Twist and Chord distribution}\label{fig:twist_and_chord}
 \end{figure}
 
-\textcolor{red}{(TO BE COMPLETED)}
+The new chord is greater near the root of the blade, which is in good correlation with the theoretical distribution, which would require an infinitely large chord at the very root of the blade. At the tip of the blade, however, the chord is smaller than the original one. Such a result does not appear to have an easy physical interpretation, but it is decided to accept the results of the optimisation, because of the fact that the overall geometry of the blade is not change but a significant amount. 
+The new twist of the blade appears to follow more closely the airfoil distribution, in the sense that sharper variations in the behaviour of the distribution function can be noted where the airfoil type is changed along the blade. The value of twist close to the root of the blade has not been kept constant like in the reference rotor, because of the fact that such a value has no practical effect on the aerodynamics of the blade.
 
 
-The outer geometry of a rotor blade is thus defined. In order to obtain the interior structure the mass and stiffness of the blades, which make up the structural properties, are scaled from the NREL $5\ MW$ reference turbine using the scaling laws shown in Table \ref{tab:aero_struct_scaling}. The scaled blade structural properties are utilised to calculate the tip deflection of the blade designed for the new $2 MW$ wind turbine. In order to calculate the tip deflections both the reference blades and the optimised blades were loaded at a wind speed $v=9.84\ m/s$, which is the rated wind speed for the $2\ MW$ wind turbine. The tip deflection is calculated using a simple finite element model. The model is based on the Bernoulli beam theory which is applied to the blade modelled as a cantilever beam. The blade discretized using the beam theory is shown in Figure \ref{fig:beam_theory}.
+The outer geometry of a rotor blade is thus defined. In order to obtain the interior structure the mass and stiffness of the blades, which make up the structural properties, are scaled from the NREL $5\ MW$ reference turbine using the scaling laws shown in Table \ref{tab:aero_struct_scaling}. The scaled blade structural properties are utilised to calculate the tip deflection of the blade designed for the new $2 MW$ wind turbine. In order to calculate the tip deflections both the reference blades and the optimised blades were loaded at a wind speed $v=9.84\ m/s$, which is the rated wind speed for the $2\ MW$ wind turbine. The tip deflection is calculated using a simple finite element model. The model is based on the Bernoulli beam theory which is applied to the blade modelled as a cantilever beam\cite{Bispl}. The blade discretized using the beam theory is shown in Figure \ref{fig:beam_theory}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Images/beam_theory.PNG} 
-\caption{Discretization of the blade using classical beam theory \textcolor{red}{(Cite me)}}\label{fig:beam_theory}
+\caption{Discretization of the blade using classical beam theory \cite{DTU_hansen}}\label{fig:beam_theory}
 \end{figure}
 
 The equations for moment and deflection obtained from the Beam theory are applied for each section. Upon using the model, the deflections in the flap-wise and the edgewise direction are shown in Figure \ref{fig:deflection}.
