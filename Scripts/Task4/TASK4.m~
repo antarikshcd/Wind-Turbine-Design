@@ -77,8 +77,6 @@ for i = 1: length(V)
 
 end
 
-
-figure('units','centimeters','position',[.1 .1 14 14])
 plot(V, P_aero);
 
 P_loss = 31508;
@@ -89,8 +87,7 @@ hold on
 
 plot(V, P_out);
 grid on
-legend('Aerodynamic power curve', 'Electric power curve');
-xlabel('Wind speed [m/s]');
-ylabel('Power [MW]');
+label('Aerodynamic power curve', 'Electric power curve');
+xlabel('Wind speed [m
 
-print('../../Images/power_curve_losses', '-dpng');
+print('../.../Images/power_curve_losses', '-dpng');
