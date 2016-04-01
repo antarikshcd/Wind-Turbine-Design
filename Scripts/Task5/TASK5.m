@@ -16,7 +16,7 @@ optimized_turbine = load([turbine_file '_OPTIMIZED.mat']);
 
 [u_y, u_z, My, Mz, L] = compute_structural_state( optimized_turbine, optimized_turbine.V_rated );
 
-T = L * 3;
+T = L * 3 * 1.35;
 
 reference_turbine = load(['../Common/NREL5MW.mat']);
 
@@ -75,6 +75,8 @@ for i = 1 : length(z)
     W(i) = trapz(A(i : end) .* rho * g) * (z(2) - z(1));
 end
 
+W = W * 1.2;
+
 % Normal stress due to weight
 theta_w = W ./ A; 
 
@@ -124,6 +126,8 @@ for i = 1: length(U)
    end
 end
 
+Mm = eval(Mm + subs(UU, x, z(end)) * Total_Mass_Top);
+
 % Compute the eigensolutions of the omogeneous problem (Km + s^2 Mm)q = 0
 [X, V] = eig(Mm\Km);
 omega_s = eig(Mm\Km);
@@ -147,6 +151,8 @@ title('Geometric dimensions')
 xlabel('[m]');
 ylabel('[m]');
 
+grid on
+
 subplot(1, 3, 2)
 plot(theta, z, 'g', [theta_max theta_max], [0 z(end)], 'r')
 ylim([ 0 1.1 * H]);
@@ -154,6 +160,8 @@ title('Max stress')
 xlabel('Max stress [Pa]') % x-axis label
 ylabel('[m]');
 legend('Total stress', 'Ultimate stress');
+
+grid on
 
 subplot(1, 3, 3)
 for i = 1: length(U)
@@ -179,6 +187,8 @@ for i = 1: length(U)
 end
 
 legend(strs);
+
+grid on
 
 print('../../Images/Tower', '-dpng'); 
 
