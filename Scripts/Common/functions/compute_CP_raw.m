@@ -69,10 +69,15 @@ for iter = 1:100
     a_new = 1./(4*F.*cos(phi)./(sigmar.*Cl)-1);
         
 
-    if max(abs(anew - a)) < 0.01 && max(abs(a_new - a_)) < 0.002
+    if max(abs(anew - a)) < 0.03 && max(abs(a_new - a_)) < 0.006
         break
     end
 
+end
+
+if (iter == 20)
+    CP = 0;
+    return
 end
 
 % Power coefficient

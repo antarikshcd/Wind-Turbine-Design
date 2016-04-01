@@ -28,7 +28,7 @@ reference_turbine = load(['../Common/NREL5MW.mat']);
 % Rotor radius, m
 R = 50;
 
-Total_Mass_Top = (R_optimal / 63) ^ 3 * (reference_turbine.Nacelle_Mass + reference_turbine.Hub_Mass) + 3 * optimized_turbine.Blade_Total_Mass;
+Total_Mass = (R_optimal / 63) ^ 3 * (reference_turbine.Nacelle_Mass + reference_turbine.Hub_Mass) + 3 * optmize
 
 
 % Linearly scaled variables
@@ -70,7 +70,7 @@ J = pi * (r2 .^ 4 - (r2 - t) .^ 4) / 4;
 
 % Weight force vector. At each value of z, W is equal to the weight of the
 % tower "above". Used to compute stresses because of own weight.
-W = zeros(size(z)) + Total_Mass_Top;
+W = zeros(size(z));
 for i = 1 : length(z)
     W(i) = trapz(A(i : end) .* rho * g) * (z(2) - z(1));
 end

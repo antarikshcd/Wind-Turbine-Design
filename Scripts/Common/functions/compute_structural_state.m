@@ -1,4 +1,4 @@
-function [u_y, u_z, My, Mz] = compute_structural_state( turbine_struct, U )
+function [u_y, u_z, My, Mz, L] = compute_structural_state( turbine_struct, U )
 
 for i = 1:length(turbine_struct.Blade_NFoil)
     CL(:,i) = turbine_struct.CL(:, turbine_struct.Blade_NFoil(i));
@@ -28,7 +28,7 @@ dFy_dl(isnan(dFy_dl)) = 0;
 dFz_dl(isnan(dFz_dl)) = 0;
 x = turbine_struct.Blade_Radius - turbine_struct.Blade_Radius(1);
 
-
+L = trapz(turbine_struct.Blade_Radius, dFz_dl);
 
 [u_y, u_z, My, Mz]= CantiBeam_Code(x, dFy_dl', dFz_dl', turbine_struct.Blade_EIedge, turbine_struct.Blade_EIflap, turbine_struct.Blade_Twist * pi / 180 + turbine_struct.Blade_PitchOffset);
 

@@ -32,7 +32,7 @@ load('../Common/optimal_radius.mat');
 % Filename of the turbine to be optimized
 turbine_file = ['../Common/SCALED_' num2str(R_optimal) 'm_' num2str(Prated * 1e-6) 'MW.mat'];
 
-addpath('functions');
+addpath('../Common/functions');
 
 % Radiuses of the optimal and reference turbines
 R = R_optimal;

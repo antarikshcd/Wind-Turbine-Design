@@ -5,7 +5,7 @@ close all
 load('../Common/optimal_radius.mat');
 
 % Add structure code folder to scripts path
-addpath('functions');
+addpath('../Common/functions');
 
 % Linearly scaled turbine file name
 turbine_file = ['../Common/SCALED_' num2str(R_optimal) 'm_' num2str(Prated * 1e-6) 'MW.mat'];
@@ -143,18 +143,31 @@ Final_Blade_Total_Mass = trapz(optimized_turbine.Blade_Mass) * ...
 fprintf('Blade mass changed by %f%% \n', (Final_Blade_Total_Mass - ...
     Initial_Blade_Total_Mass) /  Initial_Blade_Total_Mass * 100);
 
+optimized_turbine.Blade_Total_Mass = Final_Blade_Total_Mass;
 % Save the new properties for the optimized data
 save([turbine_file '_OPTIMIZED.mat'], '-struct', 'optimized_turbine')
 
 
+% figure('units','centimeters','position',[.1 .1 14 14])
+% plot(optimized_turbine.Blade_Radius, optimized_turbine.new_u_y, '-o', optimized_turbine.Blade_Radius, optimized_turbine.u_y, '-o', optimized_turbine.Blade_Radius, simple_scaling_turbine.u_y, '-o')
+% grid on
+% legend('Optimized and corrected blade', 'Only optimized blade', 'Simply scaled blade', 'Location', 'SouthWest');
+% print('../../Images/flapwise_comparison','-dpng')
+% 
+% figure('units','centimeters','position',[.1 .1 14 14])
+% plot(optimized_turbine.Blade_Radius, optimized_turbine.new_u_z, '-x', optimized_turbine.Blade_Radius, optimized_turbine.u_z, '-x', optimized_turbine.Blade_Radius, simple_scaling_turbine.u_z, '-x')
+% grid on
+% legend('Optimized and corrected blade', 'Only optimized blade', 'Simply scaled blade', 'Location', 'NorthWest');
+% print('../../Images/edgewise_comparison','-dpng')
+
 figure('units','centimeters','position',[.1 .1 14 14])
-plot(optimized_turbine.Blade_Radius, optimized_turbine.new_u_y, '-o', optimized_turbine.Blade_Radius, optimized_turbine.u_y, '-o', optimized_turbine.Blade_Radius, simple_scaling_turbine.u_y, '-o')
+plot(optimized_turbine.Blade_Radius, optimized_turbine.u_y, '-o', optimized_turbine.Blade_Radius, simple_scaling_turbine.u_y, '-o')
 grid on
-legend('Optimized and corrected blade', 'Only optimized blade', 'Simply scaled blade', 'Location', 'SouthWest');
+legend('Only optimized blade', 'Simply scaled blade', 'Location', 'SouthWest');
 print('../../Images/flapwise_comparison','-dpng')
 
 figure('units','centimeters','position',[.1 .1 14 14])
-plot(optimized_turbine.Blade_Radius, optimized_turbine.new_u_z, '-x', optimized_turbine.Blade_Radius, optimized_turbine.u_z, '-x', optimized_turbine.Blade_Radius, simple_scaling_turbine.u_z, '-x')
+plot(optimized_turbine.Blade_Radius, optimized_turbine.u_z, '-x', optimized_turbine.Blade_Radius, simple_scaling_turbine.u_z, '-x')
 grid on
-legend('Optimized and corrected blade', 'Only optimized blade', 'Simply scaled blade', 'Location', 'NorthWest');
+legend('Simply scaled blade', 'Location', 'NorthWest');
 print('../../Images/edgewise_comparison','-dpng')
