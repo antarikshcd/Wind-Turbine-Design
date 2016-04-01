@@ -1,35 +1,72 @@
 \section{Drive train design}
 
-\subsection{Drive train configurations}
+The following section deals with the design of the drive train and involves the selection of a type of drive train and the calculation of the component specifications therein.
 
-\begin{table}[h]
+\subsection{Choice of drive train}
+
+The choice of drive train configuration for the wind turbine is made by weighing advantages and disadvantages of various types of typical drive trains and relating them to the market location and desired conditions. A list of advantages and disadvantages of the four most common drive train configurations are listed in Table \ref{tab:comparison_dt}. 
+
+\begin{table}[H]
+\label{tab:comparison_dt}
+\hspace*{-2.cm}
 \centering
 \caption{Comparison of drive train concepts}
-\label{tab:comp_drivetrain_concepts}
-\begin{tabular}{ |l|l|l|l| } 
-\hline
-\textbf{Drivetrain} & \textbf{Advantages} & \textbf{Disadvantages} & \textbf{Specifications}\\ 
-\hline
-Doubly Fed Induction (geared) & \begin{itemize} \item Suitable for 2 MW rated power \\ \item Variable speed generator \\
-\item Active- and reactive-power control \\
-\item Only about a third of the power flows though inverter → smaller inverter → lower inverter cost and losses \\
-\end{itemize}
-& \begin{itemize}
-\item Poor power quality \\
-\item Gear failures and maintenance costs \\
-\item Generator with brushes \\
-\end{itemize}
-& \begin{itemize}
-    \item Pitch control \\
-    \item For rated power between 1.5 – 3 MW\\
-\end{itemize}\\
-\hline
-\end{tabular} \\
+\begin{tabular}{ |l|l|l|l| }
+ \hline
+ \textbf{Drivetrain} & \textbf{Advantages} & \textbf{Disadvantages} & \textbf{Specifications} \\ 
+ \hline
+ Doubly Fed & - Suitable for 2 MW & - Gear failures and & - Pitch control\\ 
+  Induction & rated power &  maintenance costs & - For rated\\ 
+ (Geared) & - Variable speed & - Generator with & power between\\
+  & generator & brushes & 1.5 – 3 MW\\
+  & - Active- and & & \\
+  & reactive-power control & &\\
+  & - Only about a &  & \\
+  & third of the power &  & \\
+  & flows through inverter & & \\
+  & \to\,$smaller inverter & & \\
+  & \to\,$lower inverter & & \\
+  & cost and losses & & \\
+  & - Controlled voltage & & \\
+  & and frequency & & \\
+  \hline
+  Full Conversion & - Good power quality & - Large and heavy & - Pitch control\\
+  Permanent Magnet & - Possibility of & - Difficult to transport & For rated power \\
+  (Geared on non-) & omitting gearbox & & between 2 – 4 MW \\
+  \hline
+ Full Conversion High & - Very good & - Complex cooling & - Pitch control\\
+ Temperature & power quality & of generator & - For rated power\\
+ Superconducting & - Efficient at all loads & - Large torque load & above 5 MW\\
+ (Direct Drive) & - Small & & \\
+  & - Light & & \\
+  & - No gearbox & & \\
+  & - Control system can & & \\
+  & be adapted to & & \\
+  & facilitate operation & & \\
+  & on weak grids & & \\
+  \hline
+  Constant Speed & - Simple design & - Low power quality & - Stall control \\
+   & - Lower & - Low control of & - Typically for  \\
+   & manufacturing costs & frequency and voltage & rated power below \\
+   & & - Narrow range of & 1.5 MW \\
+   & & efficient rotational & \\
+   & & speed & \\
+   & & - Higher cut-in & \\
+   & & wind speed & \\
+  \hline
+ \end{tabular}
 \end{table}
 
-\subsubsection{Choice of drive train}
+\newpage
+Although constant speed (CS) drive train turbines have a simple design, due to the lack of speed control systems they have numerous drawbacks that limit their applicability in the Southern African market, even though it makes them cheaper. They produce low power quality as their frequency and voltage is not well controlled, thus requiring a stiff grid. However, particularly in South Africa, the grid is recognisably weak \cite{onishi}. Additionally, CS drive trains are typically used for turbines with a rated power below 1.5 MW, and thus can be ruled out of the options  \cite{mcgahan}.
 
-The choice drive train configuration for the wind turbine was made by weighing out advantages and disadvantages of various types of typical drive trains and relating them to the market location and conditions are being aimed for. 
+The full conversion high temperature superconducting (HTS) drive train generates a very good quality power and can be designed small, light and without a gearbox. For these reasons it would be an attractive configuration for Southern Africa where the turbines would have to be transported to the wind farm locations via roads of questionable standards. Nevertheless, full conversion HTS direct drive trains are typically applied for turbines with a rated power above 5 MW and thus can be ruled out as not being suitable for the 2 MW AlphaWind turbine \cite{mcgahan}.
+
+Full conversion permanent magnet (PM) type generators can have direct or geared drive trains and produce good quality power. In cases no gearbox is used, a bulky multipole direct driven generators are used. These are large and thus difficult to transport thus counteracting the benefit of the gear-less configuration \cite{hansen}.
+
+The doubly fed induction generator (DFIG) configuration uses a transmission with a gearbox; however, the output power quality is relatively good as it has a voltage and frequency control. Additionally, the partial frequency converter allows using a smaller and cheaper inverter with lower losses as only about 30\% of the power produced goes through the inverter \cite{hau}. The generator is not particularly bulky as in direct drive trains and can easily be transported to the installation locations. The rated power of the AlphaWind turbine falls well between the range of power for which DFIG is typically applied. Furthermore, considering that power quality and transportability are two very important factors in the choice of drive train for the Southern African region, the DFIG configuration is the most suitable and will thus be applied in the AlphaWind turbine.
+
+
 \subsection{Main frame and electrical system configuration}
 
 \subsubsection{Summary of the design}
@@ -47,11 +84,9 @@ Special considerations for the chosen system design & XX  \\
 \end{center}
 
 
-
 Figure 41. Overview of nacelle
 
 \subsubsection{Supporting material, analyses and rationale}
-
 
 \newpage
 
@@ -70,7 +105,9 @@ The summary of the gearbox design is given in Table \ref{tab:overview_drivetrain
 \textbf{Parameter} & \textbf{Symbol} & \textbf{Value/Description}\\ 
 \hline
 Speed range at rated power (LSS / HSS) & $n_{LSS}$/$n_{HSS}$&  14.36 rpm / 1077 rpm \\ 
+\hline
 Torque at rated power (LSS / HSS) & $Q_{LSS}$ / $Q_{HSS}$ & 1410696 Nm / 18253 Nm\\
+\hline
 Mass of the gearbox & $m_{gearbox}$ & 17.4 t\\
 \hline
 \end{tabular} \\
@@ -85,19 +122,33 @@ Mass of the gearbox & $m_{gearbox}$ & 17.4 t\\
 \textbf{Parameter} & \textbf{Symbol} & \textbf{Value/Description}\\ 
 \hline
 Gearbox type & & 3 stage gearbox\\
+\hline
 Gearbox stage 1 & & planetary\\
+\hline
 Gearbox stage 2 & & parallel\\
+\hline
 Gearbox stage 3 & & parallel\\
+\hline
 Gearbox ratio & N & 75 \\
+\hline
 Gear ratio stage 1 & $N_1$ & 5\\
+\hline
 Gear ratio stage 2 & $N_2$ & 5\\
+\hline
 Gear ratio stage 3 & $N_3$ & 3\\
+\hline
 Number of teeth sun& $z_{sun1}$ & 20\\
+\hline
 Number of teeth planet& $z_{planet3}$ & 30\\
+\hline
 Number of teeth ring& $z_{ring3}$ & 80\\
+\hline
 Number of teeth pinion& $z_{p2}$ & 20\\
+\hline
 Number of teeth gear& $z_{g2}$ & 100\\
+\hline
 Number of teeth pinion& $z_{p3}$ & 20\\
+\hline
 Number of teeth gear& $z_{g3}$ & 60\\
 \hline
 \end{tabular} \\
@@ -139,40 +190,55 @@ The summary of the generator design is given in Table \ref{tab:generator_config}
 \textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
 \hline
 Type of generator & & DFIG\\
+\hline
 Power rating & & 2.105 MVAr\\
+\hline
 Generator power factor & pf & 0.95\\
+\hline
 Grid frequency & $f_{grid}$ & 50 Hz  \\
+\hline
 Generator poles & $p$ & 6\\
+\hline
 Generator voltage level & $U_{gen}$ & 1400 V\\
+\hline
 Generator torque at rated speed & $Q_{HSS}$ & 18253 Nm \\
+\hline
 Minimum generator speed & $n_{min}$ & 567 rpm\\
+\hline
 Synchronous speed & $n_s$ & 1000 rpm\\
+\hline
 Generator rated speed & $n_{rated}$ & 1077 rpm\\
+\hline
 Maximum generator speed & $n_{max}$ & 1250 rpm \\
+\hline
 Force density & $F_d$ & 30000 $\frac{N}{m}$\\
+\hline
 Generator volume & $V_{gen}$ & 0.3042 $m^3$\\
+\hline
 Generator length & $L_{gen}$ & 1 m\\
+\hline
 Rotor radius & $R_{rot}$ & 0.3111 m\\
+\hline
 Rotor mass & $m_{rot}$ & 2388 kg \\
+\hline
 Inertia generator rotor & $\Theta_{rot}$ & 122.5 $kg m^2$\\
+\hline
 Generator inverter rating & $x$ & 0.25\\
+\hline
 Safety margin against rotor overshoot & & 16 \%\\
 \hline
 \end{tabular} \\
 \end{table}
 
-\subsubsection{Supporting material, analyses and rationale}
+\subsubsection{Generator design}
 
-For the AlphaWind design we choose to use a DFIG. This offers the advantage to operate at a wide range of generator speeds with high efficiency.
-
-DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. Since the turbine is variable speed and thus delivers dependent on the wind speed different amount of power to the grid, the DFIG generator is operated in PV mode with a power factor specified at 0.95.
-
-The mechanical power needed to get a desired amount of electrical power out of the turbine is calculated as
+The choice of DIFG for the AlphaWind design offers the advantage to operate at a wide range of generator speeds with high efficiency. DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. Since the turbine is variable speed and thus delivers dependent on the wind speed different amount of power to the grid, the DFIG generator is operated in PV mode with a power factor specified at 0.95. The mechanical power needed to get a desired amount of electrical power out of the turbine is calculated as
 
 \begin{equation}
-    P_{in} = \dfrac{P_{out}}{\eta_{el}\eta_{s1}\eta_{s2}\eta_{s3}} - P_{loss\,fix}
+    P_{in} = \dfrac{P_{out}}{\eta_{el}\eta_{s1}\eta_{s2}\eta_{s3}} + P_{loss\,fix}
     \label{eq:P_in}
 \end{equation}
+\\
 where $\eta_{el}$ is the efficiency of the generator and all the other components together (bearings), $\eta_{si}$ are the efficiencies of the gearbox stages (variable loss) and $P_{loss, \, fix}$ are the fixed losses in the gearbox stages independent of the transmitted power.
 
 
@@ -187,7 +253,7 @@ With this the input needed into the generator to produce 2 MW of rated power bec
     P_{in\,gen} = \dfrac{P_{rated}}{\eta_{el}} = \dfrac{2 MW}{0.9715} = 2.05 MW
 \end{align}
 
-At rated speed each gearbox stage is assumed to have 1\% loss of transmitted power. This means an efficiency of $\eta_{ri} = 0.9900$ at rated power for each stage, where half of it is assumed to be independent of the transmitted power and half of it is assumed to be a linear function of the transmitted power. With this the fixed loss of the gearbox is calculated at rated power as half of the sum of the losses in each stage: 
+At rated speed each gearbox stage is assumed to have 1\% loss of transmitted power \cite{hau}. This means an efficiency of $\eta_{ri} = 0.9900$ at rated power for each stage, where half of it is assumed to be independent of the transmitted power and half of it is assumed to be a linear function of the transmitted power. With this the fixed loss of the gearbox is calculated at rated power as half of the sum of the losses in each stage: 
 
 \begin{align}
     P_{loss\,fix} &= \dfrac{1}{2} \sum \limits_{s = 1}^{3} \left( P_{in} - P_{out}\right)_{s}\\
@@ -214,6 +280,7 @@ The length of the generator rotor was assumed to be 1 m, with this the generator
 \begin{equation}
     m_{generator} = 6.47 P_{rated}^{0.9223}
 \end{equation}
+
 where $P_{rated}$ is the rated power of the turbine inserted in kW. 
 
 The generator rotor inertia is calculated using the standard formula for the inertia of a rotor: 
@@ -222,70 +289,80 @@ The generator rotor inertia is calculated using the standard formula for the ine
 \Theta_{rot}= \dfrac{1}{2}m_{rot}R_{rot}^2
 \end{equation}
 
+The generator inverter rating, $x$, is used to specify the minimum rotor speed of the generator that is required to start the generator.  
+
+
+
+
+
+
+
 \newpage
 \subsection{Inverter}
 
 \subsubsection{Summary of the design}
 
-\begin{center}
-Table 47. Objectives and boundary conditions\\
-\begin{tabular}{ |l|c| } 
+\begin{table}[h]
+\centering
+\caption{Inverter design specification}
+\label{tab:}
+\begin{tabular}{ |l|c|c|} 
 \hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
+\textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
 \hline
-Voltage level & XX  \\ 
-\hline
-Power rating (think of power factor) & XX \\
-\hline
-\end{tabular} \\
-\end{center}
-
-\begin{center}
-Table 48. Design variables/choices\\
-\begin{tabular}{ |l|c| } 
-\hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
-\hline
-Location (in nacelle or tower base)Type of inverter (selected from standard inverters) & XX  \\ 
-\hline
-Type of inverter (selected from standard inverters) & XX \\
+Voltage level & $U$ & 1.8 kV\\
+Power rating & & \\
 \hline
 \end{tabular} \\
-\end{center}
-
-\subsubsection{Supporting material, analyses and rationale}
+\end{table}
 
 
+\begin{table}[h]
+\centering
+\caption{Inverter design}
+\label{tab:}
+\begin{tabular}{ |l|c|c|} 
+\hline
+\textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
+\hline
+Location of the converter & & tower base  \\ 
+Type of converter & & Air cooled doubly-fed converter \\
+Weight of inverter & $m_{inverter}$ & 1900 kg \\
+\hline
+\end{tabular} \\
+\end{table}
 
-\subsection{Power cables in tower}
+
+\subsubsection{Choice of inverter and design}
+
+As inverter the ACS800-67 conveter by ABB is chosen \cite{ABB}. 
+
+\subsection{Power cables}
 
 \subsubsection{Summary of the design}
+The summary of the cable design is given in Table \ref{tab:power_cables}.
 
-\begin{center}
-Table 49. Objectives and boundary conditions\\
-\begin{tabular}{ |l|c| } 
+\begin{table}[h]
+\centering
+\caption{Power cables in tower}
+\label{tab:power_cables}
+\begin{tabular}{ |l|c|c|} 
 \hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
+\textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
 \hline
-Voltage level & XX  \\ 
-\hline
-Power rating (think of power factor): Per phase (= per cable) & XX \\
+Voltage level & $U$ & 1.8 kV\\
+Current per phase & I_{phase} & 101.3 A\\
+
+Cable & & HELUWIND® WK POWERLINE ALU 105°C 1,8/3kV\\
+
 \hline
 \end{tabular} \\
-\end{center}
+\end{table}
 
-\begin{center}
-Table 410. Design variables/choices\\
-\begin{tabular}{ |l|c| } 
-\hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
-\hline
-Type of cables (selected from standard cables) & XX  \\ 
-\hline
-Length & XX \\
-\hline
-\end{tabular} \\
-\end{center}
-\subsubsection{Supporting material, analyses and rationale}
+\subsubsection{Cable selection}
+
+The cable chosen for inside the turbine tower is the (N)TSCGEHXOEU cable by Draka Industry&Speciality. This three phase cable with Copper cores is specially designed for application in Wind Turbines and certified for 1,8/3 kV at 50Hz \cite{Draka}. This cable is chosen because of it's high flexibility which is needed inside the tower to connect the yawed turbine nacelle to the inverter at the bottom of the tower. 
+
+
 
 
