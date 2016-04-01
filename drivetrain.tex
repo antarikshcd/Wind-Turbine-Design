@@ -7,10 +7,10 @@ The following section deals with the design of the drive train and involves the 
 The choice of drive train configuration for the wind turbine is made by weighing advantages and disadvantages of various types of typical drive trains and relating them to the market location and desired conditions. A list of advantages and disadvantages of the four most common drive train configurations are listed in Table \ref{tab:comparison_dt}. 
 
 \begin{table}[H]
-\label{tab:comparison_dt}
 \hspace*{-2.cm}
 \centering
 \caption{Comparison of drive train concepts}
+\label{tab:comparison_dt}
 \begin{tabular}{ |l|l|l|l| }
  \hline
  \textbf{Drivetrain} & \textbf{Advantages} & \textbf{Disadvantages} & \textbf{Specifications} \\ 
@@ -62,35 +62,14 @@ Although constant speed (CS) drive train turbines have a simple design, due to t
 
 The full conversion high temperature superconducting (HTS) drive train generates a very good quality power and can be designed small, light and without a gearbox. For these reasons it would be an attractive configuration for Southern Africa where the turbines would have to be transported to the wind farm locations via roads of questionable standards. Nevertheless, full conversion HTS direct drive trains are typically applied for turbines with a rated power above 5 MW and thus can be ruled out as not being suitable for the 2 MW AlphaWind turbine \cite{mcgahan}.
 
-Full conversion permanent magnet (PM) type generators can have direct or geared drive trains and produce good quality power. In cases no gearbox is used, a bulky multipole direct driven generators are used. These are large and thus difficult to transport thus counteracting the benefit of the gear-less configuration \cite{hansen}.
+Full conversion permanent magnet (PM) type generators can have direct or geared drive trains and produce good quality power. In cases where no gearbox is used, bulky multipole direct driven generators are used. These are large and thus difficult to transport thus counteracting the benefit of the gear-less configuration \cite{hansen}.
 
 The doubly fed induction generator (DFIG) configuration uses a transmission with a gearbox; however, the output power quality is relatively good as it has a voltage and frequency control. Additionally, the partial frequency converter allows using a smaller and cheaper inverter with lower losses as only about 30\% of the power produced goes through the inverter \cite{hau}. The generator is not particularly bulky as in direct drive trains and can easily be transported to the installation locations. The rated power of the AlphaWind turbine falls well between the range of power for which DFIG is typically applied. Furthermore, considering that power quality and transportability are two very important factors in the choice of drive train for the Southern African region, the DFIG configuration is the most suitable and will thus be applied in the AlphaWind turbine.
 
 
-\subsection{Main frame and electrical system configuration}
-
-\subsubsection{Summary of the design}
-
-
-\begin{center}
-Table 41. Objectives and boundary conditions\\
-\begin{tabular}{ |l|c| } 
-\hline
-\textbf{Parameter} & \textbf{Value/Description}  \\ 
-\hline
-Special considerations for the chosen system design & XX  \\ 
-\hline
-\end{tabular} \\
-\end{center}
-
-
-\subsubsection{Supporting material, analyses and rationale}
-
-\newpage
-
 \subsection{Gearbox}
 
-\subsubsection{Summary of the design}
+\subsubsection{Gearbox summary}
 
 The summary of the gearbox design is given in Table \ref{tab:overview_drivetrain} and \ref{tab:gearbox_config}. 
 
@@ -151,7 +130,7 @@ Number of teeth gear& $z_{g3}$ & 60\\
 \hline
 Gearbox length& & 1660 mm\\
 \hline
-Generator diameter& & 2055 mm\\
+Gearbox diameter& & 2055 mm\\
 \hline
 \end{tabular} \\
 \end{table}
@@ -177,10 +156,11 @@ where $Q_{LSS}$ is the rated LSS torque given by Equation \ref{eq:Q_LSS} inserte
 m_{gearbox} = 17.4 \, t
 \end{align}
 
+The gearbox external dimensions, length and diameter, were assumed to be equal to those of a similar DFIG Hitachi 2 MW wind turbine \cite{hitachi}.
 
 \subsection{Generator}
 
-\subsubsection{Summary of the design}
+\subsubsection{Generator summary}
 
 The summary of the generator design is given in Table \ref{tab:generator_config}. 
 \begin{table}[h]
@@ -189,7 +169,7 @@ The summary of the generator design is given in Table \ref{tab:generator_config}
 \label{tab:generator_config}
 \begin{tabular}{ |l|c|c|} 
 \hline
-\textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value/Description}  \\ 
 \hline
 Type of generator & & DFIG\\
 \hline
@@ -236,7 +216,7 @@ Safety margin against rotor overshoot & & 16 \%\\
 \end{tabular} \\
 \end{table}
 
-\subsubsection{Generator design}
+\subsubsection{Generator design rationale}
 
 The choice of DIFG for the AlphaWind design offers the advantage to operate at a wide range of generator speeds with high efficiency. The general electrical setup using a DFIG is depicted in Figure \ref{fig:DFIG_figure}. DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. Since the turbine is variable speed and thus delivers dependent on the wind speed different amount of power to the grid, the DFIG generator is operated in PV mode with a power factor specified at 0.95. The mechanical power needed to get a desired amount of electrical power out of the turbine is calculated as
 
@@ -267,7 +247,7 @@ With this the input needed into the generator to produce 2 MW of rated power bec
     P_{in\,gen} = \dfrac{P_{rated}}{\eta_{el}} = \dfrac{2 MW}{0.9715} = 2.05 MW
 \end{align}
 
-At rated speed each gearbox stage is assumed to have 1\% loss of transmitted power \cite{hau}. This means an efficiency of $\eta_{ri} = 0.9900$ at rated power for each stage, where half of it is assumed to be independent of the transmitted power and half of it is assumed to be a linear function of the transmitted power. With this the fixed loss of the gearbox is calculated at rated power as half of the sum of the losses in each stage: 
+At rated speed each gearbox stage is assumed to have 1\% loss of transmitted power \cite{hau}. This means an efficiency of $\eta_{ri} = 0.9900$ at rated power for each stage, where half of it is assumed to be independent of the transmitted power and half of it is assumed to be a linear function of the transmitted power. With this the fixed loss of the gearbox is calculated at rated power as half of the sum of the losses in each stage
 
 \begin{align}
     P_{loss\,fix} &= \dfrac{1}{2} \sum \limits_{s = 1}^{3} \left( P_{in} - P_{out}\right)_{s}\\
@@ -298,14 +278,14 @@ The length of the generator rotor was assumed to be 1 m, with this the generator
 
 where $P_{rated}$ is the rated power of the turbine inserted in kW. 
 
-The generator rotor inertia is calculated using the standard formula for the inertia of a rotor: 
+The generator rotor inertia is calculated using the standard formula for the inertia of a rotor
 
 \begin{align}
 \Theta_{rot} &= \dfrac{1}{2}m_{rot}R_{rot}^2 \\
 &= \dfrac{1}{2}\cdot 2388\ ,kg \cdot (0.3111 \ ,m)^2 = 122.5 \, kgm^2 \nonumber
 \end{align}
 
-The generator inverter rating, $x$, is used to specify the minimum speed of the generator that is required to start it. This speed is obtained as,
+The generator inverter rating, $x$, is used to specify the minimum speed of the generator that is required to start it. This speed is obtained as
 
 \begin{equation}
     \omega_{cut-in} = \dfrac{(1- \sqrt{3}\cdot x)\cdot n_s}{N}= 7.56\ rpm
@@ -315,26 +295,26 @@ The generator inverter rating, $x$, is used to specify the minimum speed of the 
 where $x$ is the generator inverter rating, $n_s$ is the synchronous speed and $N$ is the gear-box ratio of the drivetrain. 
 The power lost in the gearbox, given by Equation \ref{eq:Ploss_fix}, needs to be overcome by the rotor at the cut-in wind speed and the cut-in rotational speed, to be able to move the rotor and simultaneously start the generator. The value of the cut-in rotational speed obtained for the rotor is used to calculate the cut-in wind velocity, $v_{cut-in}$, at which the rotor will just overcome the resistance provided by the drive-train and thus start motion. This is done by using the $C_p-\lambda$ curve at a rotational speed of $\omega_{cut-in}$ in order to obtain the wind velocity at which the power losses in the gear-box can be overcome.
 In the relation for the tip-speed ratio given by $\lambda= \frac{\omega_{cut-in} R}{v}$, the tip-speed ratio is varied by varying the wind velocity $v$. The power coefficient, $C_p$, is then calculated for each tip-speed ratio. Using this value the power is obtained for each of the wind velocity value used to calculate the tip-speed ratio. The corresponding velocity at which the fixed losses in the gear-box, given by Equation \ref{eq:Ploss_fix}, are overcome, is then chosen as the cut-in wind velocity.
-The cut-in wind velocity, $v_{cut-in}$, is thus obtained as,
+The cut-in wind velocity, $v_{cut-in}$, is thus obtained as
 
 \begin{equation}
     v_{cut-in} = 3\ m/s
 \label{eq:cut-in_wind_vel}
 \end{equation}
 
-
+The generator casing dimensions, length and diameter, were assumed to be equal to those of a similar DFIG Hitachi 2 MW wind turbine \cite{hitachi}.
 
 
 
 \newpage
 \subsection{Inverter}
 
-\subsubsection{Summary of the design}
+\subsubsection{Inverter summary}
 
 \begin{table}[h]
 \centering
 \caption{Specification of ACS800-67 inverter}
-\label{tab:}
+\label{tab:inverter}
 \begin{tabular}{ |l|c|c|} 
 \hline
 \textbf{Parameter} & Symbol & \textbf{Value/Description} \\ 
@@ -369,7 +349,7 @@ As inverter the ACS800-67 conveter by ABB is chosen \cite{ABB}. The generator vo
 
 \subsection{Power cables}
 
-\subsubsection{Summary of the design}
+\subsubsection{Cables summary}
 The summary of the cable design is given in Table \ref{tab:power_cables}.
 
 \begin{table}[h]
@@ -402,20 +382,21 @@ The current per phase is calculated as
     &= \dfrac{2 MW}{\sqrt{3} \cdot 12 kV \cdot 0.95} = 101.3\,A \nonumber
 \end{align}
 
-To connect with the grid the generator stator is directly connected to the transformer station outside the tower and the generator rotor is connected to the inverter which is located at the bottom of the wind turbine tower. Therefore two cable strings of 3 phase power cable are needed inside the tower. With the tower height being 69.5 m the overall cable length from generator to inverter used is estimated as 160 m. 
+To connect with the grid the generator stator is directly connected to the transformer station outside the tower and the generator rotor is connected to the inverter which is located at the bottom of the wind turbine tower. Therefore two cable strings of 3 phase power cable are needed inside the tower. With the tower height being 69.5 m the overall cable length from generator to the inverter is estimated to be 160 m. 
 
 The copper losses for all three phases at rated power can be estimated as
 
-0.000672 Ohm/m
-
 \begin{align}
-    P_{loss} &= 3 \rho I_{phase}^2 L_{cable}
-    &= 3 \cdot
+    P_{loss} &= 3 \rho I_{phase}^2 L_{cable} \\
+    &= 3 \cdot 0.000672\,Ohm/m \cdot \left(101.3\,A\right)^2 \cdot 160\,m = 3.3\,kV \nonumber
 \end{align}
+
+where $\rho$ is the specific resistance of the copper cable that is being calculated using the conductivity of copper and the cross sectional surface of 25 $mm^2$ per phase. 
 
 \subsection{Diagram of drive train configuration}
 
-The
+Figure \ref{fig:eddie's art} shows a schematic two dimensional diagram of the nacelle and the tower base in which the designed components are to scale with respect to each other, the nacelle and the tower diameter. The length and diameter of the gearbox and generator are those specified in tables \ref{tab:gearbox_config} and \ref{tab:generator_config}. The nacelle dimensions are assumed to be the same as those of a similar DFIG Hitachi 2 MW wind turbine with a length of 6.7 m and a height of 4 m \cite{hitachi}. The tower base diameter of 4.76 m has been obtained by scaling from the reference turbine. The inverter dimensions are those specified in table \ref{tab:inverter}. The tilt angle of the shaft is of $5\deg$ which is the same as the reference turbine.
+
 
 \begin{figure}[H]
     \centering

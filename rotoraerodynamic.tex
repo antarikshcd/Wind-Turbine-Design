@@ -27,21 +27,41 @@ Design tip speed ratio & 7.67 \\
 \hline
 \textbf{Parameter} & \textbf{Value/Description}  \\ 
 \hline
-Aerofoil 1 & XX  \\ 
+Aerofoil 1 & same as reference turbine  \\ 
 \hline
-Min. and max. dimensionless radius r/R for aerofoil 1 & XX \\ 
+Max. dimensionless radius r/R for aerofoil 1 & 0,111626344849294 \\ 
 \hline
-Aerofoil 2 & XX \\
+Aerofoil 2 & same as reference turbine  \\
 \hline
-Min. and max. dimensionless radius r/R for aerofoil 2 & XX \\
+Max. dimensionless radius r/R for aerofoil 2 & 0,158136916244952 \\ 
 \hline
-Aerofoil 3 & XX \\
+Aerofoil 3 & same as reference turbine  \\
 \hline
-Min. and max. dimensionless radius r/R for aerofoil 3 & XX \\
+Max. dimensionless radius r/R for aerofoil 3 & 0,220152093105513 \\ 
 \hline
-Twist offset at tip (= blade pitch angle for optimal operation) & XX \\
+Aerofoil 4 & same as reference turbine  \\
 \hline
-‘Thickness factor’ of the blade laminates & XX \\
+Max. dimensionless radius r/R for aerofoil 4 & 0,328697311356036 \\ 
+\hline
+Aerofoil 5 & same as reference turbine  \\
+\hline
+Max. dimensionless radius r/R for aerofoil 5 & 0,421710341649725 \\ 
+\hline
+Aerofoil 6 & same as reference turbine  \\
+\hline
+Max. dimensionless radius r/R for aerofoil 6 & 0,545739072871321 \\ 
+\hline
+Aerofoil 7 & same as reference turbine  \\
+\hline
+Max. dimensionless radius r/R for aerofoil 7 & 0,669769426592443 \\ 
+\hline
+Aerofoil 8 & same as reference turbine  \\
+\hline
+Max. dimensionless radius r/R for aerofoil 8 &  1\\ 
+\hline
+Twist offset at tip (= blade pitch angle for optimal operation) & $0.37 \deg$ \\
+\hline
+‘Thickness factor’ of the blade laminates & variable \\
 \hline
 \end{tabular} \\
 \end{center}
@@ -80,7 +100,7 @@ Chord, $c$ & R & 0.794\\
 \subsection{Supporting material, analyses and rationale}
 The blade from the NREL $5\ MW$ reference turbine \cite{5MW} is designed using an optimised chord and twist distribution based on its design parameters. The design is then compared with the original reference turbine.
 
-The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters is shown in Table \ref{tab:aero_struct_scaling}. These scaling laws are obtained from the square-cube law which states that (\textcolor{red}{state the square-cube law}) and by referring to the scaling laws provided with the course material \cite{scaling_laws}. The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in listing \ref{lst:task3_2} of Appendix A.
+The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters is shown in Table \ref{tab:aero_struct_scaling}. These scaling laws are provided with the course material \cite{scaling_laws} and are based on Galileo's square-cube law which states that when an object increases in size, the area scales as square of the length specifier and volume scales as cube of the length specifier \cite{galileo}. The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in listing \ref{lst:task3_2} of Appendix A.
 
 The optimisation's target is to obtain the twist and chord distribution functions that produce the highest $C_p$ under some logical constraints, i.e. the fact that the chord can not assume negative values. Moreover, a set of technological constraints are added, such that the new values can't be larger than double the original value. 
 
@@ -94,7 +114,7 @@ The scaled and optimised values of twist and chord are visible in figure \ref{fi
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.0\textwidth]{Images/twist_and_chord.png} 
+\includegraphics[width=0.7\textwidth]{Images/twist_and_chord.png} 
 \caption{Twist and Chord distribution}\label{fig:twist_and_chord}
 \end{figure}
 
@@ -149,13 +169,13 @@ It can be observed from the plots shown in Figure \ref{fig:deflection} that the 
 \label{fig:deflection_compare}
 \end{figure}
 
-The stresses developed in the flap-wise and edgewise directions in the $5\ MW$ reference and $2\ MW$ optimised AlphaWind turbine are compared relatively by making use of their ratios. The properties that the stresses depend on are namely, the mass $M$ and the stiffness $EI$ along the direction being considered. An additional scaling factor used is the chord $c$ of the respective blades. The chord is utilised to factor in the relative changes in the sizes of the blade cross-sections. The dependence of the stresses for the reference and optimised blades on these factors are expressed as;
+The stresses developed in the flap-wise and edgewise directions in the $5\ MW$ reference and $2\ MW$ optimised AlphaWind turbine are compared relatively by making use of their ratios. The properties that the stresses depend on are namely, the mass $M$ and the stiffness $EI$ along the direction being considered. An additional scaling factor used is the chord $c$ of the respective blades. The chord is utilised to factor in the relative changes in the sizes of the blade cross-sections. The dependence of the stresses for the reference and optimised blades on these factors are expressed as
 \begin{align}
     \sigma_{ref} &\propto \dfrac{M_{ref}}{EI_{ref}}\cdot c_{ref} \label{eq:stress_ref} \\
     \sigma_{opt} &\propto \dfrac{M_{opt}}{EI_{opt}}\cdot c_{opt} \label{eq:stress_opt}
 \end{align}
 
-where, $\sigma_{ref},\ M_{ref},\ EI_{ref}$ and $c_{ref}$ represent the stress, mass, stiffness and the chord respectively of the reference blade for the  $5\ MW$ turbine. Similarly, $\sigma_{opt},\ M_{opt},\ EI_{opt}$ and $c_{opt}$ represent the stress, mass, stiffness and the chord respectively of the optimised blade for the  $2\ MW$ turbine being designed. The relationship between the two stresses is established by taking the ratio between Equation \ref{eq:stress_opt} and Equation \ref{eq:stress_ref} and is expressed as,
+where, $\sigma_{ref},\ M_{ref},\ EI_{ref}$ and $c_{ref}$ represent the stress, mass, stiffness and the chord respectively of the reference blade for the  $5\ MW$ turbine. Similarly, $\sigma_{opt},\ M_{opt},\ EI_{opt}$ and $c_{opt}$ represent the stress, mass, stiffness and the chord respectively of the optimised blade for the  $2\ MW$ turbine being designed. The relationship between the two stresses is established by taking the ratio between Equation \ref{eq:stress_opt} and Equation \ref{eq:stress_ref} and is expressed as
 
 \begin{equation}
      \zeta = \dfrac{\sigma_{opt}}{\sigma_{ref}} = \dfrac{M_{opt}}{M_{ref}}\cdot\dfrac{EI_{ref}}{EI_{opt}}\cdot \dfrac{c_{opt}}{c_{ref}}
@@ -170,14 +190,14 @@ The stress ratio shown in Equation \ref{eq:stress_ratio} is calculated for both 
 \caption{Stress ratio, $\zeta$, along the blade span  }\label{fig:stress_ratio_before}
 \end{figure}
 
-In Figure \ref{fig:stress_ratio_before} the stress ratio for both the edgewise and flap-wise directions can be seen to increase towards the tip. This means that, in the optimised blade the stresses tend to increase towards the tip as compared to the scaled reference blade. Thus, a correction factor is introduced which redistributes the inertia of the blade structure such that the more of the stress is handled by the structure near the root than by the part of the blade near the tip. The correction factor is expressed as the maximum of the stress ratio in the flap-wise and edgewise directions;
+In Figure \ref{fig:stress_ratio_before} the stress ratio for both the edgewise and flap-wise directions can be seen to increase towards the tip. This means that, in the optimised blade the stresses tend to increase towards the tip as compared to the scaled reference blade. Thus, a correction factor is introduced which redistributes the inertia of the blade structure such that the more of the stress is handled by the structure near the root than by the part of the blade near the tip. The correction factor is expressed as the maximum of the stress ratio in the flap-wise and edgewise directions
 
 \begin{equation}
      cf = max(\zeta_{z},\zeta_{y})
 \label{eq:correction_factor}
 \end{equation}
 \\
-The correction factor is then utilised to change the mass and stiffness of the blade. The new expressions for the structural properties thus become;
+The correction factor is then utilised to change the mass and stiffness of the blade. The new expressions for the structural properties thus become
 
 \begin{align}
      M  &= M_{old} \cdot \sqrt{cf} \label{eq:new_mass} \\
