@@ -27,35 +27,35 @@ Design tip speed ratio & 7.67 \\
 \hline
 \textbf{Parameter} & \textbf{Value/Description}  \\ 
 \hline
-Aerofoil 1 & same as reference turbine  \\ 
+Aerofoil 1 & Cylinder 1  \\ 
 \hline
-Max. dimensionless radius r/R for aerofoil 1 & 0,111626344849294 \\ 
+Max. dimensionless radius r/R for aerofoil 1 & 0.11 \\ 
 \hline
-Aerofoil 2 & same as reference turbine  \\
+Aerofoil 2 & Cylinder 2 \\
 \hline
-Max. dimensionless radius r/R for aerofoil 2 & 0,158136916244952 \\ 
+Max. dimensionless radius r/R for aerofoil 2 & 0.16 \\ 
 \hline
-Aerofoil 3 & same as reference turbine  \\
+Aerofoil 3 & DU40_A17 \\
 \hline
-Max. dimensionless radius r/R for aerofoil 3 & 0,220152093105513 \\ 
+Max. dimensionless radius r/R for aerofoil 3 & 0.22 \\ 
 \hline
-Aerofoil 4 & same as reference turbine  \\
+Aerofoil 4 & DU35_A17  \\
 \hline
-Max. dimensionless radius r/R for aerofoil 4 & 0,328697311356036 \\ 
+Max. dimensionless radius r/R for aerofoil 4 & 0.33 \\ 
 \hline
-Aerofoil 5 & same as reference turbine  \\
+Aerofoil 5 & DU30_A17  \\
 \hline
-Max. dimensionless radius r/R for aerofoil 5 & 0,421710341649725 \\ 
+Max. dimensionless radius r/R for aerofoil 5 & 0.42 \\ 
 \hline
-Aerofoil 6 & same as reference turbine  \\
+Aerofoil 6 & DU25_A17  \\
 \hline
-Max. dimensionless radius r/R for aerofoil 6 & 0,545739072871321 \\ 
+Max. dimensionless radius r/R for aerofoil 6 & 0.56 \\ 
 \hline
-Aerofoil 7 & same as reference turbine  \\
+Aerofoil 7 & DU21_A17  \\
 \hline
-Max. dimensionless radius r/R for aerofoil 7 & 0,669769426592443 \\ 
+Max. dimensionless radius r/R for aerofoil 7 & 0.67 \\ 
 \hline
-Aerofoil 8 & same as reference turbine  \\
+Aerofoil 8 & NACA64_A17  \\
 \hline
 Max. dimensionless radius r/R for aerofoil 8 &  1\\ 
 \hline
@@ -100,11 +100,11 @@ Chord, $c$ & R & 0.794\\
 \subsection{Supporting material, analyses and rationale}
 The blade from the NREL $5\ MW$ reference turbine \cite{5MW} is designed using an optimised chord and twist distribution based on its design parameters. The design is then compared with the original reference turbine.
 
-The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters is shown in Table \ref{tab:aero_struct_scaling}. These scaling laws are provided with the course material \cite{scaling_laws} and are based on Galileo's square-cube law which states that when an object increases in size, the area scales as square of the length specifier and volume scales as cube of the length specifier \cite{galileo}. The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in listing \ref{lst:task3_2} of Appendix A.
+The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters is shown in Table \ref{tab:aero_struct_scaling}. These scaling laws are provided with the course material \cite{scaling_laws} and are based on Galileo's square-cube law which states that when an object increases in size, the area scales as square of the length specifier and volume scales as cube of the length specifier \cite{galileo}. The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in the Matlab code for task 3.
 
 The optimisation's target is to obtain the twist and chord distribution functions that produce the highest $C_p$ under some logical constraints, i.e. the fact that the chord can not assume negative values. Moreover, a set of technological constraints are added, such that the new values can't be larger than double the original value. 
 
-Such functions are expressed by using a set of degrees of freedom, which represent the values of twist and chord at certain uniformly distributed radial locations. The values at all the other locations are obtained by means of cubic spline interpolation. The radial locations used to evaluate the value of $C_p$ are linearly scaled from the reference NREL $5\ MW$ turbine. The value of $C_p$ is computed by using the BEM code available in the FAST program. Such code has been extracted and isolated as a function that returns the value of $C_p$ given the properties of the wind turbine, as can be seen in listing \ref{lst:Cp}.
+Such functions are expressed by using a set of degrees of freedom, which represent the values of twist and chord at certain uniformly distributed radial locations. The values at all the other locations are obtained by means of cubic spline interpolation. The radial locations used to evaluate the value of $C_p$ are linearly scaled from the reference NREL $5\ MW$ turbine. The value of $C_p$ is computed by using the BEM code available in the FAST program. Such code has been extracted and isolated as a function that returns the value of $C_p$ given the properties of the wind turbine, as can be seen in the Matlab code for task 3.
 
 In order to simplify the analysis, it is decided not to change the airfoil distribution of the reference turbine. Albeit reductive, such choice has been taken to reduce the number of degrees of freedom of the problem, and because of the fact that such a discontinuous function would not be easily optimised by high performance algorithms, which usually require the computation of the Jacobian matrix of the cost function.
 
