@@ -176,15 +176,15 @@ print('../../Images/edgewise_comparison','-dpng')
 
 
 figure('units','centimeters','position',[.1 .1 14 14])
-plot(optimized_turbine.Blade_Radius, optimized_turbine.EIedge, optimized_turbine.Blade_Radius, optimized_turbine.EIflap)
+plot(optimized_turbine.Blade_Radius, optimized_turbine.Blade_EIedge, optimized_turbine.Blade_Radius, optimized_turbine.Blade_EIflap)
 grid on
-legend('Edge direction inertia', 'Flap direction intertia', 'Location', 'NorthWest');
-print('../../Images/edgewise_comparison','-dpng')
-
+legend('Edge direction inertia', 'Flap direction intertia', 'Location', 'NorthEast');
+print('../../Images/inertia_dist','-dpng')
+xlabel('Radial position [m]');
+ylabel('Inertia distribution');
 figure('units','centimeters','position',[.1 .1 14 14])
-plot(optimized_turbine.Blade_Radius, optimized_turbine.Mass)
+plot(optimized_turbine.Blade_Radius, optimized_turbine.Blade_Mass)
 grid on
-legend('Simply scaled blade', 'Location', 'NorthWest');
-print('../../Images/edgewise_comparison','-dpng')
-
-
+print('../../Images/mass_dist','-dpng')
+xlabel('Radial position [m]');
+ylabel('Mass distribution');
