@@ -1,31 +1,81 @@
 \section{Tower design}
 
+Once the rotor design has been completed, it is possible to assess the structural properties of the wind turbine's tower. The process is divided in two phases: first, the reference tower is linearly scaled in height, section diameter, and wall thickness. Then, by computing the thrust produced by the rotor, the stresses inside the tower are estimated, and it is checked that the safety factor is satisfactory, and that the fist natural frequency of the system is sufficiently high.
+
 \subsection{Summary of the design}
 
-Once the rotor design has been completed, it is possible to assess the structural properties of the wind turbine's tower. The process is divided in two phases: first, the reference tower is linearly scaled in height, section diameter, and wall thickness. Then, by computing the thrust produced by the rotor, the stresses inside the tower are estimated, and it is checked that the safety factor is satisfactory, and that the fist natural frequency of the system is sufficiently high.
+The final results for the tower analysis are presented in Table \ref{tab:tower}. The minimum safety factor of $3.05$ is considered to be sufficient, as presented in \cite{NREL_tower}.
+The first natural frequency is $0.402Hz$. By looking at the frequency ranges of the $1P$ and $3P$ regions, it is noted that possible resonance problems may arise at a rotor speed of $8.0 rpm$. It is thus necessary to apply frequency skipping at such frequency.
+
+\begin{table}[H]
+\begin{center} 
+\caption{Rotor frequency ranges}\label{tab:freq_ranges}
+\begin{tabular}{ |l|c| } 
+\hline
+\textbf{Parameter} & \textbf{Value/Description}  \\ 
+\hline
+1P cut-in speed & $0.13 Hz$ \\ 
+\hline
+1P cut-out speed & $0.24 Hz$ \\ 
+\hline
+3P cut-in speed & $0.38 Hz$ \\ 
+\hline
+3P cut-out speed & $0.72 Hz$ \\ 
+\hline
+\end{tabular} \\
+\end{center}
+\end{table}
+
+
+\begin{table}[H]
+\begin{center} 
+\caption{Tower design parameters}\label{tab:tower}
+\begin{tabular}{ |l|c| } 
+\hline
+\textbf{Parameter} & \textbf{Value/Description}  \\ 
+\hline
+Tower height & $69.5 m$ \\ 
+\hline
+Tower bottom radius & $2.38 m$ \\ 
+\hline
+Tower top radius & $1.53 m$ \\
+\hline
+Tower top thickness & $0.0214 m$ \\
+\hline
+Tower bottom thicnkess & $0.0151 m$ \\
+\hline
+Maximum strees & $81.7883 MPa$ \\
+\hline
+Minimum safety factor & $3.05$ \\
+\hline
+First natural frequency & $0.402 Hz$ \\
+\hline
+\end{tabular} \\
+\end{center}
+\end{table}
 
 \subsection{Supporting material, analyses and rationale}
 
-In order to compute stresses in the blade, thrust must be computed fist. The highest value of thrust is obtained at the rated wind speed (\cite{hau}), thus it is chosen to use such condition to asses the tower design. 
+In order to compute stresses in the blade, thrust must be computed fist. The highest value of thrust is obtained at the rated wind speed \cite{hau}, thus it is chosen to use such condition to asses the tower design. 
 To compute thrust, the BEM code is used again to compute the induction factor $a$. Then, lift and drag distributions are computed, starting from the definition of the angle of attack $\alpha$:
 
 \begin{equation}
     \alpha = \phi - \beta + \theta 
 \end{equation}
 
-where:
+where
 
 \begin{equation}
     \phi = \arctan\left(\frac{V(1 - a)}{ \Omega r}\right)
 \end{equation}
 
-The actual velocity at the blade airfoil is computed as:
+The actual velocity at the blade airfoil is computed as
 
 \begin{equation}
     V = \sqrt{ (V ( 1 - a )) ^ 2 + ( \Omega r ) ^ 2}
 \end{equation}
 
-Lift and drag per unit span are computed as:
+Lift and drag per unit span are computed as
 
 \begin{equation}
     \frac{dL_a}{dr} = \frac{1}{2} \rho V ^ 2 C_l c;
@@ -35,7 +85,7 @@ Lift and drag per unit span are computed as:
     \frac{dD_a}{dr}  = \frac{1}{2} \rho V ^ 2 C_d c;
 \end{equation}
 
-and finally, forces in the edge and flap directions are computed as:
+and finally, forces in the edge and flap directions are computed as
 
 \begin{equation}
     \frac{dF_y}{dr}  = dL_a \sin(\phi) - dD_a \cos(\phi);
@@ -45,20 +95,20 @@ and finally, forces in the edge and flap directions are computed as:
     \frac{dF_z}{dr}  = dL_a \cos(\phi) + dD_a \sin(\phi);
 \end{equation}
 
-The total value of thrust per blade is computed by integrating the force in the $z$ direction:
+The total value of thrust per blade is computed by integrating the force in the $z$ direction
 
 \begin{equation}
     F_z = \int_{0}^{R} \frac{dF_z}{dr} dr
 \end{equation}
 
-The final value of thrust is computed at rated conditions:
+The final value of thrust is computed at rated conditions
 
 \begin{align}
     T &= 3 F_z \\
     &= 308 kN \\ \nonumber
 \end{align}
 
-At this point, stresses are computed in the tower by applying simple beam theory. The sectional properties of the tower and the stresses in the tower's wall are computed as presented in \cite{Bispl} as a function of height $h$. Maximum stresses are supposed to be equal to the summation of gravitational and bending stresses, the latter being the most severe. The value of the stress in the tower is computed as:
+At this point, stresses are computed in the tower by applying simple beam theory using a dynamic loading factor of $1.35$ and a static loading factor of $1.2$. The sectional properties of the tower and the stresses in the tower's wall are computed as presented in \cite{Bispl} as a function of height $h$, while the material properties are supposed to be equal to those used for the reference turbine. Maximum stresses are supposed to be equal to the summation of gravitational and bending stresses, the latter being the most severe. The value of the stress in the tower is computed as
 
 \begin{equation}
     \sigma = \frac{N}{A} + \frac{M r_{ext}}{I}
@@ -66,6 +116,8 @@ At this point, stresses are computed in the tower by applying simple beam theory
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{Images/chord.png} 
-\caption{Chord distribution}\label{fig:chord}
+\includegraphics[width=0.9\textwidth]{Images/Tower.png} 
+\caption{Tower dimensions, stresses and natural modes}\label{fig:chord}
 \end{figure}
+
+From \cite{Bispl} also natural frequencies of the beam are computed, by applying a simple polynomial Galerkin approximation of the Principle of Virtual Work.  
