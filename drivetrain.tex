@@ -24,8 +24,8 @@ The choice of drive train configuration for the wind turbine is made by weighing
   & - Only about a &  & \\
   & third of the power &  & \\
   & flows through inverter & & \\
-  & \to\,$smaller inverter & & \\
-  & \to\,$lower inverter & & \\
+  & $\to$ smaller inverter & & \\
+  & $\to$ lower inverter & & \\
   & cost and losses & & \\
   & - Controlled voltage & & \\
   & and frequency & & \\
@@ -83,8 +83,6 @@ Special considerations for the chosen system design & XX  \\
 \end{tabular} \\
 \end{center}
 
-
-Figure 41. Overview of nacelle
 
 \subsubsection{Supporting material, analyses and rationale}
 
@@ -150,6 +148,10 @@ Number of teeth gear& $z_{g2}$ & 100\\
 Number of teeth pinion& $z_{p3}$ & 20\\
 \hline
 Number of teeth gear& $z_{g3}$ & 60\\
+\hline
+Gearbox length& & 1660 mm\\
+\hline
+Generator diameter& & 2055 mm\\
 \hline
 \end{tabular} \\
 \end{table}
@@ -221,6 +223,10 @@ Rotor radius & $R_{rot}$ & 0.3111 m\\
 \hline
 Rotor mass & $m_{rot}$ & 2388 kg \\
 \hline
+Generator casing length& & 3538 mm\\
+\hline
+Generator casing diameter& & 1391 mm\\
+\hline
 Inertia generator rotor & $\Theta_{rot}$ & 122.5 $kg m^2$\\
 \hline
 Generator inverter rating & $x$ & 0.25\\
@@ -232,14 +238,22 @@ Safety margin against rotor overshoot & & 16 \%\\
 
 \subsubsection{Generator design}
 
-The choice of DIFG for the AlphaWind design offers the advantage to operate at a wide range of generator speeds with high efficiency. DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. Since the turbine is variable speed and thus delivers dependent on the wind speed different amount of power to the grid, the DFIG generator is operated in PV mode with a power factor specified at 0.95. The mechanical power needed to get a desired amount of electrical power out of the turbine is calculated as
+The choice of DIFG for the AlphaWind design offers the advantage to operate at a wide range of generator speeds with high efficiency. The general electrical setup using a DFIG is depicted in Figure \ref{fig:DFIG_figure}. DFIG generators can be operated in voltage control mode (PV) and power factor control mode (PQ) \cite{Londero2012}. Since the turbine is variable speed and thus delivers dependent on the wind speed different amount of power to the grid, the DFIG generator is operated in PV mode with a power factor specified at 0.95. The mechanical power needed to get a desired amount of electrical power out of the turbine is calculated as
 
 \begin{equation}
     P_{in} = \dfrac{P_{out}}{\eta_{el}\eta_{s1}\eta_{s2}\eta_{s3}} + P_{loss\,fix}
     \label{eq:P_in}
 \end{equation}
 \\
-where $\eta_{el}$ is the efficiency of the generator and all the other components together (bearings), $\eta_{si}$ are the efficiencies of the gearbox stages (variable loss) and $P_{loss, \, fix}$ are the fixed losses in the gearbox stages independent of the transmitted power.
+where $\eta_{el}$ is the efficiency of the generator, inverter and all the other components combined (e.g. bearings), $\eta_{si}$ are the efficiencies of the gearbox stages (variable loss) and $P_{loss, \, fix}$ are the fixed losses in the gearbox stages independent of the transmitted power.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Images/DFIG_figure.png} 
+\caption{DFIG layout, taken from \cite{Le2016}}
+\label{fig:DFIG_figure}
+\end{figure}
+
 
 
 The the efficiency of the generator together with the bearings is assumed to be constant
@@ -259,6 +273,7 @@ At rated speed each gearbox stage is assumed to have 1\% loss of transmitted pow
     P_{loss\,fix} &= \dfrac{1}{2} \sum \limits_{s = 1}^{3} \left( P_{in} - P_{out}\right)_{s}\\
     &= \dfrac{1}{2} \left( \left( \dfrac{P_{in\,gen}}{\eta_{r1}\eta_{s2} \eta_{r3}} - \dfrac{P_{in\,gen}}{\eta_{r2} \eta_{r3}} \right)_{1} + \left( \dfrac{P_{in\,gen}}{\eta_{r2} \eta_{r3}} - \dfrac{P_{in\,gen}}{\eta_{r3}}\right)_{2}+ \left( \dfrac{P_{in\,gen}}{\eta_{r3}} - P_{in\,gen} \right) \right)\\
     &= \dfrac{1}{2} \left( \dfrac{2.05 MW}{0.99^3} - 2.05 MW \right) = 31.5 \,kW
+\label{eq:Ploss_fix}
 \end{align}
 
 For the losses that vary with the power in Equation \ref{eq:P_in} subsequently a gearbox efficiency of $\eta_{si} = 0.9950$ must be used (since the fixed 0.5 \% loss is accounted via $P_{loss \, fix}$).
@@ -278,20 +293,34 @@ The dimensions of the generator rotor are calculated using the formulae given in
 The length of the generator rotor was assumed to be 1 m, with this the generator rotor radius $R_{rot}$ was calculated. Using these dimensions the generator rotor mass is estimated. The overall generator mass (rotor + stator + housing) is calculated using again the empirical formula given in Reference~\cite{Fingersh2006}
 
 \begin{equation}
-    m_{generator} = 6.47 P_{rated}^{0.9223}
+    m_{generator} = 6.47 \left(P_{rated}\right)^{0.9223}
 \end{equation}
 
 where $P_{rated}$ is the rated power of the turbine inserted in kW. 
 
 The generator rotor inertia is calculated using the standard formula for the inertia of a rotor: 
 
+\begin{align}
+\Theta_{rot} &= \dfrac{1}{2}m_{rot}R_{rot}^2 \\
+&= \dfrac{1}{2}\cdot 2388\ ,kg \cdot (0.3111 \ ,m)^2 = 122.5 \, kgm^2 \nonumber
+\end{align}
+
+The generator inverter rating, $x$, is used to specify the minimum speed of the generator that is required to start it. This speed is obtained as,
+
 \begin{equation}
-\Theta_{rot}= \dfrac{1}{2}m_{rot}R_{rot}^2
+    \omega_{cut-in} = \dfrac{(1- \sqrt{3}\cdot x)\cdot n_s}{N}= 7.56\ rpm
+\label{eq:cut-in_speed}
 \end{equation}
 
-The generator inverter rating, $x$, is used to specify the minimum rotor speed of the generator that is required to start the generator.  
+where $x$ is the generator inverter rating, $n_s$ is the synchronous speed and $N$ is the gear-box ratio of the drivetrain. 
+The power lost in the gearbox, given by Equation \ref{eq:Ploss_fix}, needs to be overcome by the rotor at the cut-in wind speed and the cut-in rotational speed, to be able to move the rotor and simultaneously start the generator. The value of the cut-in rotational speed obtained for the rotor is used to calculate the cut-in wind velocity, $v_{cut-in}$, at which the rotor will just overcome the resistance provided by the drive-train and thus start motion. This is done by using the $C_p-\lambda$ curve at a rotational speed of $\omega_{cut-in}$ in order to obtain the wind velocity at which the power losses in the gear-box can be overcome.
+In the relation for the tip-speed ratio given by $\lambda= \frac{\omega_{cut-in} R}{v}$, the tip-speed ratio is varied by varying the wind velocity $v$. The power coefficient, $C_p$, is then calculated for each tip-speed ratio. Using this value the power is obtained for each of the wind velocity value used to calculate the tip-speed ratio. The corresponding velocity at which the fixed losses in the gear-box, given by Equation \ref{eq:Ploss_fix}, are overcome, is then chosen as the cut-in wind velocity.
+The cut-in wind velocity, $v_{cut-in}$, is thus obtained as,
 
-
+\begin{equation}
+    v_{cut-in} = 3\ m/s
+\label{eq:cut-in_wind_vel}
+\end{equation}
 
 
 
@@ -304,29 +333,30 @@ The generator inverter rating, $x$, is used to specify the minimum rotor speed o
 
 \begin{table}[h]
 \centering
-\caption{Inverter design specification}
+\caption{Specification of ACS800-67 inverter}
 \label{tab:}
 \begin{tabular}{ |l|c|c|} 
 \hline
-\textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
+\textbf{Parameter} & Symbol & \textbf{Value/Description} \\ 
 \hline
-Voltage level & $U$ & 1.8 kV\\
-Power rating & & \\
+Type of converter & & Air cooled doubly-fed converter \\
 \hline
-\end{tabular} \\
-\end{table}
-
-
-\begin{table}[h]
-\centering
-\caption{Inverter design}
-\label{tab:}
-\begin{tabular}{ |l|c|c|} 
+Inverter voltage level & $U$ & up to 12 kV\\
 \hline
-\textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
+Generator nominal power range & & 0.9 - 2.2 MW \\
+\hline
+Efficiency at rated power & & 98 \% \\ 
+\hline
+Nominal frequency & $f$ & 50 Hz $\pm 3$ \% \\
 \hline
 Location of the converter & & tower base  \\ 
-Type of converter & & Air cooled doubly-fed converter \\
+\hline
+Dimensions of cabinet & W & 2500 mm \\
+\hline
+& H & 1800 mm \\
+\hline
+& D & 600 mm \\
+\hline
 Weight of inverter & $m_{inverter}$ & 1900 kg \\
 \hline
 \end{tabular} \\
@@ -335,7 +365,7 @@ Weight of inverter & $m_{inverter}$ & 1900 kg \\
 
 \subsubsection{Choice of inverter and design}
 
-As inverter the ACS800-67 conveter by ABB is chosen \cite{ABB}. 
+As inverter the ACS800-67 conveter by ABB is chosen \cite{ABB}. The generator voltage level is chosen at the upper limit specified by the manufacturer for the inverter. According to ABB the inverter can operate at to 12 kV, so this voltage is chosen. With this the currents per phase in the cables connecting the generator with the inverter at the bottom of the tower can be reduced, which reduces the copper losses of the electrical transmission. Nowadays most turbine manufacturers locate the inverter cabinet at the base of the tower, including it's cooling system which is also located in the tower \cite{hau}.
 
 \subsection{Power cables}
 
@@ -350,19 +380,48 @@ The summary of the cable design is given in Table \ref{tab:power_cables}.
 \hline
 \textbf{Parameter} & Symbol & \textbf{Value/Description}  \\ 
 \hline
-Voltage level & $U$ & 1.8 kV\\
-Current per phase & I_{phase} & 101.3 A\\
-
-Cable & & HELUWIND® WK POWERLINE ALU 105°C 1,8/3kV\\
-
+Voltage level & $U$ & 12 kV\\
+\hline
+Current per phase & $I_{phase}$ & 101.3 A\\
+\hline
+Cable & & TECWIND(H) (N)TSCGEHXOEU 5DK9 501  \\
+\hline
+Cable approval & & DIN VDE 0250, Part 813 \\
 \hline
 \end{tabular} \\
 \end{table}
 
 \subsubsection{Cable selection}
 
-The cable chosen for inside the turbine tower is the (N)TSCGEHXOEU cable by Draka Industry&Speciality. This three phase cable with Copper cores is specially designed for application in Wind Turbines and certified for 1,8/3 kV at 50Hz \cite{Draka}. This cable is chosen because of it's high flexibility which is needed inside the tower to connect the yawed turbine nacelle to the inverter at the bottom of the tower. 
+The cable chosen for inside the turbine tower is the (N)TSCGEHXOEU cable by Draka Industry\&Speciality. This three phase cable with Copper cores is specially designed for application in Wind Turbines and certified for  Uo/U = 3.6/6.0 kV to 20/35 kV at 50 Hz \cite{Draka}. This cable is chosen because of it's high flexibility which is needed inside the tower to connect the yawed turbine nacelle to the inverter at the bottom of the tower.
 
+The current per phase is calculated as
 
+\begin{align}
+    I_{phase} &= \dfrac{P_{rated}}{\sqrt{3}U \cos \phi} \\
+    &= \dfrac{2 MW}{\sqrt{3} \cdot 12 kV \cdot 0.95} = 101.3\,A \nonumber
+\end{align}
+
+To connect with the grid the generator stator is directly connected to the transformer station outside the tower and the generator rotor is connected to the inverter which is located at the bottom of the wind turbine tower. Therefore two cable strings of 3 phase power cable are needed inside the tower. With the tower height being 69.5 m the overall cable length from generator to inverter used is estimated as 160 m. 
+
+The copper losses for all three phases at rated power can be estimated as
+
+0.000672 Ohm/m
+
+\begin{align}
+    P_{loss} &= 3 \rho I_{phase}^2 L_{cable}
+    &= 3 \cdot
+\end{align}
+
+\subsection{Diagram of drive train configuration}
+
+The
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/Drive_train_sketch.jpg}
+    \caption{Schematic diagram of drive train configuration}
+    \label{fig:eddie's art}
+\end{figure}
 
 
