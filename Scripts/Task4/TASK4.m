@@ -81,16 +81,16 @@ end
 figure('units','centimeters','position',[.1 .1 14 14])
 plot(V, P_aero);
 
-P_loss = 31508;
-eta_tot = 0.995 ^ 3 * 0.9715;
-P_out = eta_tot * (P_aero - P_loss);
+%P_loss = 31508;
+%eta_tot = 0.995 ^ 3 * 0.9715;
+%P_out = eta_tot * (P_aero - P_loss);
 
-hold on
+%hold on
 
-plot(V, P_out);
+%plot(V, P_out);
 grid on
-legend('Aerodynamic power curve', 'Electric power curve');
+%legend('Aerodynamic power curve', 'Electric power curve');
 xlabel('Wind speed [m/s]');
 ylabel('Power [MW]');
 
-print('../../Images/power_curve_losses', '-dpng');
+print('../../Images/power_curve_aero', '-dpng');

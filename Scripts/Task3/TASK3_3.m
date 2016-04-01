@@ -77,6 +77,7 @@ r = optimized_turbine.Blade_Radius(1:end -5) /...
 % Plot the values before the correction
 figure('units','centimeters','position',[.1 .1 14 14])
 plot(r, sigma_ratio_y, r, sigma_ratio_z);
+grid on
 xlabel('Normalized radius [-]');
 ylabel('Stress ratio [-]');
 legend('Sigma ratio flap direction', 'Sigma ratio edge direction');
@@ -130,6 +131,7 @@ sigma_ratio_z = optimized_turbine.Mz(1: end - 5) ./ ...
 % Plot the values before the correction
 figure('units','centimeters','position',[.1 .1 14 14])
 plot(r, sigma_ratio_y, r, sigma_ratio_z);
+grid on
 xlabel('Normalized radius [-]');
 ylabel('Stress ratio [-]');
 legend('Sigma ratio flap direction', 'Sigma ratio edge direction');
@@ -171,3 +173,18 @@ plot(optimized_turbine.Blade_Radius, optimized_turbine.u_z, '-x', optimized_turb
 grid on
 legend('Simply scaled blade', 'Location', 'NorthWest');
 print('../../Images/edgewise_comparison','-dpng')
+
+
+figure('units','centimeters','position',[.1 .1 14 14])
+plot(optimized_turbine.Blade_Radius, optimized_turbine.EIedge, optimized_turbine.Blade_Radius, optimized_turbine.EIflap)
+grid on
+legend('Edge direction inertia', 'Flap direction intertia', 'Location', 'NorthWest');
+print('../../Images/edgewise_comparison','-dpng')
+
+figure('units','centimeters','position',[.1 .1 14 14])
+plot(optimized_turbine.Blade_Radius, optimized_turbine.Mass)
+grid on
+legend('Simply scaled blade', 'Location', 'NorthWest');
+print('../../Images/edgewise_comparison','-dpng')
+
+
