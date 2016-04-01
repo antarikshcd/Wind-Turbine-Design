@@ -1,6 +1,8 @@
-\section{Rotor aerodynamic and structural design} \label{rotor design}
-This section deals with the aerodynamic and the inner structural design of the blades for the on-shore wind turbine to be designed at the tip-speed ratio of $7.67$ and for a rotor diameter of $100.0 \m$, as decided in Section \ref{system design}. 
+\section{Rotor aerodynamic and structural design} \label{sec:rotor design}
+This section deals with the aerodynamic and the inner structural design of the blades for the on-shore wind turbine to be designed at the tip-speed ratio of $7.67$ and for a rotor diameter of $100.0\ m$, as decided in Section \ref{sec:system design}.
+
 \subsection{Summary of the design}
+
 \begin{table}[H]
 \begin{center} 
 \caption{Objectives and boundary conditions}\label{tab:rotordesign2}
@@ -45,6 +47,23 @@ Twist offset at tip (= blade pitch angle for optimal operation) & XX \\
 \end{center}
 \end{table}
 
+\begin{table}[h]
+\centering
+\caption{Scaling laws used for the aerodynamic and structural design}
+\label{tab:aero_struct_scaling}
+\begin{tabular}{ |l|c|c| } 
+\hline
+\textbf{Parameter} & \textbf{Scaling Law} & \textbf{Scaling Factor}\\ 
+\hline
+Mass, $M$ & $R^3$ & 0.499 \\
+\hline
+Stiffness, $EI$ & $R^4$ & 0.397 \\
+\hline
+Chord, $c$ & R & 0.794\\
+\hline
+\end{tabular} \\
+\end{table}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{Images/chord.png} 
@@ -59,30 +78,70 @@ Twist offset at tip (= blade pitch angle for optimal operation) & XX \\
 
 
 \subsection{Supporting material, analyses and rationale}
-The blade from the NREL $5\ MW$ reference turbine \textcolor{red}{(cite this)} is designed using an optimised chord and twist distribution based on its design parameters. The design is then compared with the original reference turbine.
+The blade from the NREL $5\ MW$ reference turbine \cite{5MW} is designed using an optimised chord and twist distribution based on its design parameters. The design is then compared with the original reference turbine.
 
-The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters have been shown in Table (\textcolor{red}{show table for scaling laws}). These scaling laws are obtained from the square-cube law which states that (\textcolor{red}{state the square-cube law}) and by referring to the scaling laws provided with the course material (\textcolor{red}{cite scaling laws}). The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in listing \ref{lst:task3_2} of appendix A.
+The blade is scaled using the scaling laws from the NREL $5\ MW$ to the desired $2\ MW$ wind turbine. The scaling laws used for each of the parameters is shown in Table (\textcolor{red}{show table for scaling laws}). These scaling laws are obtained from the square-cube law which states that (\textcolor{red}{state the square-cube law}) and by referring to the scaling laws provided with the course material (\textcolor{red}{cite scaling laws}). The blade's geometry is then optimised to obtain the best desirable performance measured by maximising the power coefficient $C_p$, as can be seen in listing \ref{lst:task3_2} of Appendix A.
 
-The optimisation's target is to obtain the twist and chord distribution functions that produce the highest $C_p$ under some constraints. Such functions are expressed by using a set of degrees of freedom, which represent the values of twist and chord at certain uniformly distributed radial locations. The values at all the other locations are obtained by means of cubic spline interpolation. The radial locations used to evaluate the value of $C_p$ are linearly scaled from the reference NREL $5\ MW$ turbine.
-
-The value of $C_p$ is computed by using the BEM code available in the FAST program. Such code has been extracted and isolated as a function that returns the value of $C_p$ given the properties of the wind turbine, as can be seen in listing \ref{lst:Cp}.
+The optimisation's target is to obtain the twist and chord distribution functions that produce the highest $C_p$ under some constraints. Such functions are expressed by using a set of degrees of freedom, which represent the values of twist and chord at certain uniformly distributed radial locations. The values at all the other locations are obtained by means of cubic spline interpolation. The radial locations used to evaluate the value of $C_p$ are linearly scaled from the reference NREL $5\ MW$ turbine. The value of $C_p$ is computed by using the BEM code available in the FAST program. Such code has been extracted and isolated as a function that returns the value of $C_p$ given the properties of the wind turbine, as can be seen in listing \ref{lst:Cp}.
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Images/twist_and_chord.png} 
-\caption{Twist distribution}\label{fig:twist_and_chord}
+\caption{Twist and Chord distribution}\label{fig:twist_and_chord}
 \end{figure}
 
 \textcolor{red}{(TO BE COMPLETED)}
 
 
-The outer geometry of a rotor blade is thus defined. In order to obtain the interior structure the mass and stiffness of the blades, which make up the structural properties, are scaled from the NREL $5\ MW$ reference turbine using the scaling laws shown in Table (\textcolor{red}{show table for scaling laws}). The scaled blade structural properties are utilised to calculate the tip deflection of the blade designed for the new $2 MW$ wind turbine. In order to calculate the tip deflections both the reference blades and the optimised blades were loaded at a wind speed $v=9.84\ m/s$, which is the rated wind speed for the $2\ MW$ wind turbine.
+The outer geometry of a rotor blade is thus defined. In order to obtain the interior structure the mass and stiffness of the blades, which make up the structural properties, are scaled from the NREL $5\ MW$ reference turbine using the scaling laws shown in Table \ref{tab:aero_struct_scaling}. The scaled blade structural properties are utilised to calculate the tip deflection of the blade designed for the new $2 MW$ wind turbine. In order to calculate the tip deflections both the reference blades and the optimised blades were loaded at a wind speed $v=9.84\ m/s$, which is the rated wind speed for the $2\ MW$ wind turbine. The tip deflection is calculated using a simple finite element model. The model is based on the Bernoulli beam theory which is applied to the blade modelled as a cantilever beam. The blade discretized using the beam theory is shown in Figure \ref{fig:beam_theory}.
 
-The tip deflection is calculated using a simple finite element model. The model is based on the Bernoulli beam theory which is applied to the blade modelled as a cantilever beam. The blade discretized using the beam theory is shown in Figure (\textcolor{red}{show beam_theory discretized figure}).The equations for moment and deflection obtained from the Beam theory are applied for each section. Upon using the model the deflections in the flap-wise and the edgewise direction are shown in Figure (\textcolor{red}{show deflection plots}).It can be observed from the plots that, the deflections for the new blade are smaller than that for the reference blade in the flap-wise direction. They are however seen to have increased in the edgewise direction. This is due to the differences in the chord and twist distribution observed between the optimised and the scaled reference blades, as shown in Figure (\textcolor{red}{show deflection comparison plots}). The new chord and twist distributions in the optimised blade cause a redistribution in the inertia in the flap-wise and edgewise directions. Thus, the deflections in the flap-wise and edgewise directions change as a consequence. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Images/beam_theory.PNG} 
+\caption{Discretization of the blade using classical beam theory \textcolor{red}{(Cite me)}}\label{fig:beam_theory}
+\end{figure}
 
-The stresses developed in the flap-wise and edgewise directions in the $5\ MW$ reference and $2\ MW$ optimised turbines are compared relatively by making use of their ratios. The properties that the stresses depend on are namely, the mass $M$ and the stiffness $EI$ along the direction being considered. An additional scaling factor used is the chord $c$ of the respective blades. The chord is utilised to factor in the relative changes in the sizes of the blade cross-sections. The dependence of the stresses for the reference and optimised blades on these factors are expressed as,
+The equations for moment and deflection obtained from the Beam theory are applied for each section. Upon using the model, the deflections in the flap-wise and the edgewise direction are shown in Figure \ref{fig:deflection}.
 
+\begin{figure}[H] 
+\hspace*{-2.cm}
+\centering
+\begin{subfigure}{0.60\textwidth}
+\includegraphics[width=\linewidth]{Images/deflection_optimal_no_correction.png} 
+\caption{Optimised Blade}
+\label{fig:deflection_optimal_1}
+\end{subfigure}~
+\begin{subfigure}{0.60\textwidth}
+\includegraphics[width=\linewidth]{Images/deflection_scaled.png}
+\caption{Scaled from Reference blade}
+\label{fig:deflection_scaled}
+\end{subfigure}
+\caption{Deflection observed in rotor blades}
+\label{fig:deflection}
+\end{figure}
+
+
+It can be observed from the plots shown in Figure \ref{fig:deflection} that the deflections for the new blade are smaller than that for the reference blade in the flap-wise direction. They are however seen to have increased in the edgewise direction. This is due to the differences in the chord and twist distribution observed between the optimised and the scaled reference blades, as shown in Figure \ref{fig:twist_and_chord}. The new chord and twist distributions in the optimised blade cause a redistribution in the inertia in the flap-wise and edgewise directions. Thus, the deflections in the flap-wise and edgewise directions change as a consequence. A comparison between the deflections in the edgewise and flap-wise directions that highlight this observation is shown in Figure \ref{fig:deflection_compare}.
+
+\begin{figure}[H] 
+\hspace*{-2.cm}
+\centering
+\begin{subfigure}{0.60\textwidth}
+\includegraphics[width=\linewidth]{Images/edgewise_comparison.png} 
+\caption{Flap-wise Deflection}
+\label{fig:deflection_edge_compare}
+\end{subfigure}~
+\begin{subfigure}{0.60\textwidth}
+\includegraphics[width=\linewidth]{Images/flapwise_comparison.png}
+\caption{Edgewise Deflection}
+\label{fig:deflection_flap_compare}
+\end{subfigure}
+\caption{Comparison of deflections observed in the scaled reference blade and the optimised blade \textcolor{red}{(Need to change the plots with better ones: labels missing, font unreadable)} }
+\label{fig:deflection_compare}
+\end{figure}
+
+The stresses developed in the flap-wise and edgewise directions in the $5\ MW$ reference and $2\ MW$ optimised AlphaWind turbine are compared relatively by making use of their ratios. The properties that the stresses depend on are namely, the mass $M$ and the stiffness $EI$ along the direction being considered. An additional scaling factor used is the chord $c$ of the respective blades. The chord is utilised to factor in the relative changes in the sizes of the blade cross-sections. The dependence of the stresses for the reference and optimised blades on these factors are expressed as;
 \begin{align}
     \sigma_{ref} &\propto \dfrac{M_{ref}}{EI_{ref}}\cdot c_{ref} \label{eq:stress_ref} \\
     \sigma_{opt} &\propto \dfrac{M_{opt}}{EI_{opt}}\cdot c_{opt} \label{eq:stress_opt}
@@ -95,4 +154,44 @@ where, $\sigma_{ref},\ M_{ref},\ EI_{ref}$ and $c_{ref}$ represent the stress, m
 \label{eq:stress_ratio}
 \end{equation}
 
-The stress ratio shown in Equation \ref{eq:stress_ratio} is calculated for both the edgewise and the flap-wise directions.
+The stress ratio shown in Equation \ref{eq:stress_ratio} is calculated for both edgewise, $\zeta_y$, and flap-wise, $\zeta_z$, directions. The variation of the stress ratio with the span of the blade is shown in Figure \ref{fig:stress_ratio_before}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Images/sigma_ratio_before.png} 
+\caption{Stress ratio, $\zeta$, along the blade span  }\label{fig:stress_ratio_before}
+\end{figure}
+
+In Figure \ref{fig:stress_ratio_before} the stress ratio for both the edgewise and flap-wise directions can be seen to increase towards the tip. This means that, in the optimised blade the stresses tend to increase towards the tip as compared to the scaled reference blade. Thus, a correction factor is introduced which redistributes the inertia of the blade structure such that the more of the stress is handled by the structure near the root than by the part of the blade near the tip. The correction factor is expressed as the maximum of the stress ratio in the flap-wise and edgewise directions;
+
+\begin{equation}
+     cf = max(\zeta_{z},\zeta_{y})
+\label{eq:correction_factor}
+\end{equation}
+\\
+The correction factor is then utilised to change the mass and stiffness of the blade. The new expressions for the structural properties thus become;
+
+\begin{align}
+     M  &= M_{old} \cdot \sqrt{cf} \label{eq:new_mass} \\
+     EI &= EI_{old} \cdot cf \label{eq:new_stiffness}
+\end{align}
+\\
+The deflections and the stress ratios in the flap-wise and edgewise directions are then recalculated based on the new values for the structural properties obtained in Equation \ref{eq:new_mass} and Equation \ref{eq:new_stiffness}. The deflections obtained after the correction is shown in Figure \ref{fig:deflection_after}. It can be observed that when compared to the blade in Figure \ref{fig:deflection_optimal_1} the deflections in both edgewise and flap-wise directions have  increased near the tip. This is expected, due to the redistribution of the inertia from the area around the root to near the tip.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Images/deflection_optimal_corrected.png} 
+\caption{Deflection along the blade span after correction}
+\label{fig:deflection_after}
+\end{figure}
+
+The stress distribution in the optimised blade after the correction is expressed by the stress ratio along the span of the blade shown in Figure \ref{fig:stress_ratio_after}. It is observed from the plot that the redistribution of the inertia has caused the stresses to redistribute as well. The stresses in the flap-wise direction have decreased towards the tip relative to the reference blade due to an increase in inertia. It is also seen that the stresses in the edgewise direction are found to be the same as that observed in the reference blade.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Images/sigma_ratio_after.png} 
+\caption{Deflection along the blade span after correction}
+\label{fig:stress_ratio_after}
+\end{figure}
+
+The optimised blade after the correction of the structural properties designed for the new $2\ MW$ turbine is then utilised to calculate the power curve which is shown in Figure (\textcolor{red}{show power cureve and refer it}). The aerodynamic and structural design of the rotor is thus finalised. 
