@@ -27,7 +27,6 @@ end
 dFy_dl(isnan(dFy_dl)) = 0;
 dFz_dl(isnan(dFz_dl)) = 0;
 x = turbine_struct.Blade_Radius - turbine_struct.Blade_Radius(1);
-
 L = trapz(turbine_struct.Blade_Radius, dFz_dl);
 
 [u_y, u_z, My, Mz]= CantiBeam_Code(x, dFy_dl', dFz_dl', turbine_struct.Blade_EIedge, turbine_struct.Blade_EIflap, turbine_struct.Blade_Twist * pi / 180 + turbine_struct.Blade_PitchOffset);

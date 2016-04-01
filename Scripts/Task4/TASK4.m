@@ -15,7 +15,7 @@ pitch = linspace(-8, 4, 10);
 lambda = linspace(4, 16, 10);
 
 optimized_turbine = load([turbine_file '_OPTIMIZED.mat']);
-omega_ci = 8.14 / 60 * 2 * pi;
+omega_ci = 7.55 / 60 * 2 * pi;
 V0 = omega_ci * R_optimal ./ lambda;
 
 lambda_optimal = optimized_turbine.Rated_TipSpeedRatio;

@@ -137,7 +137,7 @@ X = X(:, ind);
 %                                 PLOTS
 % ======================================================================= %
 
-figure
+figure('units','centimeters','position',[.1 .1 28 14])
 
 subplot(1, 3, 1)
 plot([-r2b r2b r2t -r2t -r2b], [0 0 H H 0], 'g')
@@ -179,4 +179,6 @@ for i = 1: length(U)
 end
 
 legend(strs);
+
+print('../../Images/Tower', '-dpng'); 
 

@@ -101,6 +101,7 @@ grid on
 legend('Original twist', 'Optimized and smoothed twist', ...
     'Raw optimized twist');
 xlabel('Radius [m]');
+
 ylabel('Twist [°]');
 
 % Plot the new chord distribution
